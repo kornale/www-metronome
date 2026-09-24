@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Polypulser – Metronome for iPhone</title>
+<meta name="description" content="A metronome for practising and performing. Give every beat its own accent and rhythm, play polyrhythms and keep your songs in setlists. No account, no ads, works offline.">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- Shared drawings: notation and beat marks, drawn like the app draws them. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="mark-marcato" viewBox="0 0 36 24"><path d="M3 21 L18 3 L33 21" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="mark-accent" viewBox="0 0 26 36"><path d="M3 3 L23 18 L3 33" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="n-quarter" viewBox="0 0 20 40"><ellipse cx="8" cy="32" rx="4.6" ry="3.4" transform="rotate(-20 8 32)" fill="currentColor"/><line x1="12.2" y1="31" x2="12.2" y2="6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="n-eighths" viewBox="0 0 42 40"><g fill="currentColor"><ellipse cx="8" cy="32" rx="4.6" ry="3.4" transform="rotate(-20 8 32)"/><ellipse cx="30" cy="32" rx="4.6" ry="3.4" transform="rotate(-20 30 32)"/><rect x="11.4" y="5" width="23.6" height="3.6"/></g><g stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="12.2" y1="31" x2="12.2" y2="6"/><line x1="34.2" y1="31" x2="34.2" y2="6"/></g></symbol>
+    <symbol id="n-sixteenths" viewBox="0 0 72 40"><g fill="currentColor"><ellipse cx="8" cy="32" rx="4.6" ry="3.4" transform="rotate(-20 8 32)"/><ellipse cx="26" cy="32" rx="4.6" ry="3.4" transform="rotate(-20 26 32)"/><ellipse cx="44" cy="32" rx="4.6" ry="3.4" transform="rotate(-20 44 32)"/><ellipse cx="62" cy="32" rx="4.6" ry="3.4" transform="rotate(-20 62 32)"/><rect x="11.4" y="5" width="55.6" height="3.4"/><rect x="11.4" y="11" width="55.6" height="3.4"/></g><g stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="12.2" y1="31" x2="12.2" y2="6"/><line x1="30.2" y1="31" x2="30.2" y2="6"/><line x1="48.2" y1="31" x2="48.2" y2="6"/><line x1="66.2" y1="31" x2="66.2" y2="6"/></g></symbol>
+    <symbol id="n-dotted" viewBox="0 0 48 40"><g fill="currentColor"><ellipse cx="8" cy="32" rx="4.6" ry="3.4" transform="rotate(-20 8 32)"/><circle cx="16.5" cy="30" r="1.8"/><ellipse cx="36" cy="32" rx="4.6" ry="3.4" transform="rotate(-20 36 32)"/><rect x="11.4" y="5" width="29.4" height="3.4"/><rect x="33" y="11" width="7.8" height="3.4"/></g><g stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="12.2" y1="31" x2="12.2" y2="6"/><line x1="40.2" y1="31" x2="40.2" y2="6"/></g></symbol>
+    <symbol id="n-triplet" viewBox="0 -4 60 44"><g fill="currentColor"><ellipse cx="8" cy="32" rx="4.6" ry="3.4" transform="rotate(-20 8 32)"/><ellipse cx="28" cy="32" rx="4.6" ry="3.4" transform="rotate(-20 28 32)"/><ellipse cx="48" cy="32" rx="4.6" ry="3.4" transform="rotate(-20 48 32)"/><rect x="11.4" y="11" width="41.4" height="3.4"/><text x="32" y="5" text-anchor="middle" font-family="ui-serif, 'New York', Georgia, serif" font-style="italic" font-weight="600" font-size="11">3</text></g><g stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="12.2" y1="31" x2="12.2" y2="12"/><line x1="32.2" y1="31" x2="32.2" y2="12"/><line x1="52.2" y1="31" x2="52.2" y2="12"/></g></symbol>
+    <symbol id="n-rest-eighth" viewBox="0 0 42 40"><path fill="currentColor" d="M6 16.5a2.3 2.3 0 1 1 3.4 2 7 7 0 0 0 4.4-3.3l1.4.5L10.6 32H8.8l3.3-11.8a8 8 0 0 1-6.1-3.7z"/><ellipse cx="28" cy="32" rx="4.6" ry="3.4" transform="rotate(-20 28 32)" fill="currentColor"/><line x1="32.2" y1="31" x2="32.2" y2="6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path fill="currentColor" d="M32.2 6c0 5 6.5 7 4.5 15 1.2-6.5-4.5-8-4.5-10z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M6 3.5v17a1 1 0 0 0 1.5.86l14-8.5a1 1 0 0 0 0-1.72l-14-8.5A1 1 0 0 0 6 3.5z"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M10.5 2h3v8.5H22v3h-8.5V22h-3v-8.5H2v-3h8.5z"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><rect x="2" y="10.5" width="20" height="3" rx="1"/></symbol>
+    <symbol id="i-tap" viewBox="0 0 24 24"><path d="M9 2.5a2 2 0 0 1 2 2V11l1-.2V9a2 2 0 0 1 4 0v2.3a2 2 0 0 1 3 1.7v4.5A6.5 6.5 0 0 1 12.5 24h-1a6 6 0 0 1-5-2.7L3 16a1.8 1.8 0 0 1 2.7-2.3L7 15V4.5a2 2 0 0 1 2-2z"/></symbol>
+    <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 3 2.5 9.5 9 16v-4.5h6a3.5 3.5 0 0 1 0 7h-3V22h3a7 7 0 0 0 0-14H9z"/></symbol>
+  </defs>
+</svg>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-current="page"><img src="images/app-icon.png" alt="" width="32" height="32">Polypulser</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Polypulser</h1>
+        <p class="tagline">A metronome for practising and performing.</p>
+        <p class="lede muted">Set a tempo, choose how many beats a bar has, and give every beat its own accent and rhythm. Play polyrhythms, and keep your songs in setlists.</p>
+        <!-- Replace with the App Store link once the app is live. -->
+        <span class="store"><span class="dot" aria-hidden="true"></span>Coming Soon to the App Store</span>
+        <p class="requirements muted">For iPhone with iOS 18 or later. No account, no ads, works offline.</p>
+      </div>
+
+      <div class="device" role="img" aria-label="The Basic screen: tempo 120 BPM Allegro, a bar of seven beats on two lines, each with its own accent and rhythm, and the Play and Tap buttons.">
+        <div class="card tempo">
+          <div class="marking">Allegro</div>
+          <div class="controls">
+            <span class="circle-btn"><svg><use href="#i-minus"/></svg></span>
+            <span class="value"><span class="n">120</span><span class="u">BPM</span></span>
+            <span class="circle-btn"><svg><use href="#i-plus"/></svg></span>
+          </div>
+        </div>
+        <div class="card beats">
+          <div class="beat-line">
+            <div class="beat-cell"><span class="beat accent play-anim" style="--i:0"><svg class="mark"><use href="#mark-marcato"/></svg></span><svg class="notes" width="18" height="26"><use href="#n-quarter"/></svg></div>
+            <div class="beat-cell"><span class="beat play-anim" style="--i:1"></span><svg class="notes" width="28" height="26"><use href="#n-eighths"/></svg></div>
+            <div class="beat-cell"><span class="beat secondary play-anim" style="--i:2"><svg class="mark"><use href="#mark-accent"/></svg></span><svg class="notes" width="32" height="26"><use href="#n-dotted"/></svg></div>
+            <div class="beat-cell"><span class="beat play-anim" style="--i:3"></span><svg class="notes" width="28" height="26"><use href="#n-rest-eighth"/></svg></div>
+          </div>
+          <div class="beat-line">
+            <div class="beat-cell"><span class="beat secondary play-anim" style="--i:4"><svg class="mark"><use href="#mark-accent"/></svg></span><svg class="notes" width="40" height="26"><use href="#n-triplet"/></svg></div>
+            <div class="beat-cell"><span class="beat play-anim" style="--i:5"></span><svg class="notes" width="48" height="26"><use href="#n-sixteenths"/></svg></div>
+            <div class="beat-cell"><span class="beat play-anim" style="--i:6"></span><svg class="notes" width="28" height="26"><use href="#n-eighths"/></svg></div>
+          </div>
+        </div>
+        <div class="transport">
+          <span class="play"><svg><use href="#i-play"/></svg></span>
+          <span class="tap"><svg><use href="#i-tap"/></svg><span>TAP</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="promise" aria-label="Privacy">
+    <div class="wrap">
+      <ul>
+        <li>No account</li>
+        <li>No ads</li>
+        <li>No tracking</li>
+        <li>Works offline</li>
+        <li>Nothing leaves your iPhone</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="showcase" aria-labelledby="lines-title">
+    <div class="wrap">
+      <div class="showcase-copy">
+        <h2 class="section-title" id="lines-title">Arrange Beats in Lines</h2>
+        <p class="section-lede muted">Lay out a bar the way you count it.</p>
+        <ol class="showcase-steps">
+          <li><span>Touch and hold a beat until it lifts.</span></li>
+          <li><span>Drag it to another line, or onto <strong>New Line</strong> above or below.</span></li>
+          <li><span>Let go. Every line can have a different number of beats, like 1 + 3 + 3 for a bar of 7.</span></li>
+        </ol>
+        <p class="muted">The circular arrow in the corner brings back the automatic layout. Lines are saved with the song and stay the same in full screen.</p>
+      </div>
+
+      <div class="card line-demo" role="img" aria-label="A bar of seven beats on two lines, four and three. The first beat is held, lifted and dragged onto New Line above the top line. The bar becomes three lines: one, three and three beats, and a reset button appears.">
+        <div class="ld-stage">
+          <div class="ld-layer ld-before">
+            <span class="ld-line" style="--x0:12;--y0:62;--w:296;--h:98"></span>
+            <span class="ld-line" style="--x0:50;--y0:176;--w:220;--h:98"></span>
+            <span class="ld-zone" style="--y0:14"><span>+ New Line</span></span>
+            <span class="ld-zone ld-zone-bottom" style="--y0:284"><span>+ New Line</span></span>
+            <span class="ld-beat beat secondary" style="--x:123.5;--y:96"><svg class="mark"><use href="#mark-accent"/></svg></span><svg class="ld-note" style="--x:123.5;--y:144.0" width="26" height="22"><use href="#n-eighths"/></svg><span class="ld-beat beat secondary" style="--x:196.5;--y:96"><svg class="mark"><use href="#mark-accent"/></svg></span><svg class="ld-note" style="--x:196.5;--y:144.0" width="14" height="22"><use href="#n-quarter"/></svg><span class="ld-beat beat secondary" style="--x:269.5;--y:96"><svg class="mark"><use href="#mark-accent"/></svg></span><svg class="ld-note" style="--x:269.5;--y:144.0" width="40" height="22"><use href="#n-sixteenths"/></svg><span class="ld-beat beat " style="--x:87;--y:212"></span><svg class="ld-note" style="--x:87;--y:260.0" width="32" height="22"><use href="#n-triplet"/></svg><span class="ld-beat beat " style="--x:160;--y:212"></span><svg class="ld-note" style="--x:160;--y:260.0" width="32" height="22"><use href="#n-triplet"/></svg><span class="ld-beat beat " style="--x:233;--y:212"></span><svg class="ld-note" style="--x:233;--y:260.0" width="32" height="22"><use href="#n-triplet"/></svg>
+          </div>
+          <div class="ld-drag" style="--x:50.5;--y:96">
+            <span class="beat accent"><svg class="mark"><use href="#mark-marcato"/></svg></span>
+            <svg class="ld-drag-note" width="14" height="22"><use href="#n-quarter"/></svg>
+            <span class="ld-finger"></span>
+          </div>
+          <div class="ld-layer ld-after">
+            <span class="ld-beat beat accent" style="--x:160;--y:48"><svg class="mark"><use href="#mark-marcato"/></svg></span><svg class="ld-note" style="--x:160;--y:98.0" width="14" height="22"><use href="#n-quarter"/></svg><span class="ld-beat beat secondary" style="--x:76;--y:150"><svg class="mark"><use href="#mark-accent"/></svg></span><svg class="ld-note" style="--x:76;--y:200.0" width="26" height="22"><use href="#n-eighths"/></svg><span class="ld-beat beat secondary" style="--x:160;--y:150"><svg class="mark"><use href="#mark-accent"/></svg></span><svg class="ld-note" style="--x:160;--y:200.0" width="14" height="22"><use href="#n-quarter"/></svg><span class="ld-beat beat secondary" style="--x:244;--y:150"><svg class="mark"><use href="#mark-accent"/></svg></span><svg class="ld-note" style="--x:244;--y:200.0" width="40" height="22"><use href="#n-sixteenths"/></svg><span class="ld-beat beat " style="--x:76;--y:252"></span><svg class="ld-note" style="--x:76;--y:302.0" width="32" height="22"><use href="#n-triplet"/></svg><span class="ld-beat beat " style="--x:160;--y:252"></span><svg class="ld-note" style="--x:160;--y:302.0" width="32" height="22"><use href="#n-triplet"/></svg><span class="ld-beat beat " style="--x:244;--y:252"></span><svg class="ld-note" style="--x:244;--y:302.0" width="32" height="22"><use href="#n-triplet"/></svg>
+            <span class="ld-reset"><svg><use href="#i-undo"/></svg></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="showcase showcase-flip" aria-labelledby="poly-title">
+    <div class="wrap">
+      <div class="showcase-copy">
+        <h2 class="section-title" id="poly-title">Polyrhythms, Two Ways</h2>
+        <p class="section-lede muted">Up to 8 lines, each with 1 to 13 notes spread evenly across one bar of 4/4, and each with its own sound.</p>
+        <dl class="modes">
+          <div><dt>Sequential</dt><dd>The lines take turns. Each plays for one bar, from top to bottom, then it starts again at the top.</dd></div>
+          <div><dt>Parallel</dt><dd>The lines you tick play at the same time, so you hear them against each other, like three against four.</dd></div>
+        </dl>
+        <p class="muted">Switch with the Sequential&nbsp;|&nbsp;Parallel control at the top of the Poly screen.</p>
+      </div>
+
+      <div class="poly-demo">
+        <div class="card pl-panel" role="img" aria-label="Sequential: three lines with 3, 4 and 5 notes play one after another, one bar each.">
+          <div class="seg" aria-hidden="true"><span class="on">Sequential</span><span>Parallel</span></div>
+          <p class="pl-caption">One line after another</p>
+          <div class="pl-lines seq" aria-hidden="true"><div class="pl-row" style="--delay:-0s"><div class="pl-track"><span class="beat accent" style="--x:0;--delay:-0s"></span><span class="beat" style="--x:0.333;--delay:-5.333s"></span><span class="beat" style="--x:0.667;--delay:-4.667s"></span><span class="pl-head"></span></div><span class="pl-count">3</span></div><div class="pl-row" style="--delay:-4s"><div class="pl-track"><span class="beat accent" style="--x:0;--delay:-4s"></span><span class="beat" style="--x:0.25;--delay:-3.5s"></span><span class="beat secondary" style="--x:0.5;--delay:-3s"></span><span class="beat" style="--x:0.75;--delay:-2.5s"></span><span class="pl-head"></span></div><span class="pl-count">4</span></div><div class="pl-row" style="--delay:-2s"><div class="pl-track"><span class="beat accent" style="--x:0;--delay:-2s"></span><span class="beat" style="--x:0.2;--delay:-1.6s"></span><span class="beat" style="--x:0.4;--delay:-1.2s"></span><span class="beat" style="--x:0.6;--delay:-0.8s"></span><span class="beat" style="--x:0.8;--delay:-0.4s"></span><span class="pl-head"></span></div><span class="pl-count">5</span></div></div>
+        </div>
+        <div class="card pl-panel" role="img" aria-label="Parallel: the ticked lines with 3 and 4 notes play together, three against four. The unticked line with 5 notes stays silent.">
+          <div class="seg" aria-hidden="true"><span>Sequential</span><span class="on">Parallel</span></div>
+          <p class="pl-caption">Ticked lines together</p>
+          <div class="pl-lines par" aria-hidden="true"><div class="pl-row"><span class="pl-tick on"></span><div class="pl-track"><span class="beat accent" style="--x:0;--delay:-0s"></span><span class="beat" style="--x:0.333;--delay:-1.333s"></span><span class="beat" style="--x:0.667;--delay:-0.667s"></span><span class="pl-head"></span></div><span class="pl-count">3</span></div><div class="pl-row"><span class="pl-tick on"></span><div class="pl-track"><span class="beat accent" style="--x:0;--delay:-0s"></span><span class="beat" style="--x:0.25;--delay:-1.5s"></span><span class="beat secondary" style="--x:0.5;--delay:-1s"></span><span class="beat" style="--x:0.75;--delay:-0.5s"></span><span class="pl-head"></span></div><span class="pl-count">4</span></div><div class="pl-row pl-off"><span class="pl-tick"></span><div class="pl-track"><span class="beat accent" style="--x:0"></span><span class="beat" style="--x:0.2"></span><span class="beat" style="--x:0.4"></span><span class="beat" style="--x:0.6"></span><span class="beat" style="--x:0.8"></span></div><span class="pl-count">5</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" aria-labelledby="features-title">
+    <div class="wrap">
+      <h2 class="section-title" id="features-title">Every Beat, Your Way</h2>
+      <p class="section-lede muted">Made for musicians who count in more than fours.</p>
+
+      <div class="feature-grid">
+        <article class="card feature">
+          <div class="art" aria-hidden="true">
+            <div class="art-beats">
+              <figure><span class="beat accent"><svg class="mark"><use href="#mark-marcato"/></svg></span><figcaption>Accent</figcaption></figure>
+              <figure><span class="beat secondary"><svg class="mark"><use href="#mark-accent"/></svg></span><figcaption>Secondary</figcaption></figure>
+              <figure><span class="beat"></span><figcaption>Normal</figcaption></figure>
+              <figure><span class="beat silent"></span><figcaption>Silent</figcaption></figure>
+            </div>
+          </div>
+          <h3>Four Accent Levels</h3>
+          <p>Tap a beat to move it through Accent, Secondary Accent, Normal and Silent. The ^ and &gt; marks tell the levels apart without relying on colour.</p>
+        </article>
+
+        <article class="card feature">
+          <div class="art" aria-hidden="true">
+            <div class="tiles">
+              <span class="tile"><svg width="16" height="26"><use href="#n-quarter"/></svg></span>
+              <span class="tile"><svg width="28" height="26"><use href="#n-eighths"/></svg></span>
+              <span class="tile"><svg width="28" height="26"><use href="#n-rest-eighth"/></svg></span>
+              <span class="tile on"><svg width="32" height="26"><use href="#n-dotted"/></svg></span>
+              <span class="tile"><svg width="48" height="26"><use href="#n-sixteenths"/></svg></span>
+              <span class="tile"><svg width="40" height="26"><use href="#n-triplet"/></svg></span>
+            </div>
+          </div>
+          <h3>A Rhythm for Every Beat</h3>
+          <p>Quarters, eighths and every combination of sixteenth notes and rests, written with dotted notes where possible. Eighth and sixteenth triplets too.</p>
+        </article>
+
+        <article class="card feature">
+          <div class="art" aria-hidden="true">
+            <div class="art-many"><span class="beat accent"></span><span class="beat"></span><span class="beat"></span><span class="beat"></span><span class="beat secondary"></span><span class="beat"></span><span class="beat"></span><span class="beat"></span><span class="beat secondary"></span><span class="beat"></span><span class="beat"></span><span class="beat"></span></div>
+          </div>
+          <h3>Bars Up to 32 Beats</h3>
+          <p>Choose 1 to 32 quarter-note beats per bar. Show only the beats, as large as possible, full screen in portrait or landscape.</p>
+        </article>
+
+        <article class="card feature">
+          <div class="art" aria-hidden="true">
+            <div class="art-tempo">
+              <div class="marking-row"><span class="chev">‹</span><span class="marking">Allegro</span><span class="chev">›</span></div>
+              <div class="n">120</div>
+              <div class="range">120–155 BPM</div>
+            </div>
+          </div>
+          <h3>Italian Tempo Markings</h3>
+          <p>The name above the tempo always matches it, from Larghissimo to Prestissimo. Tap it to choose from the list, or swipe on it to jump between markings.</p>
+        </article>
+
+        <article class="card feature">
+          <div class="art" aria-hidden="true">
+            <div class="art-setlist">
+              <div class="song"><span class="num">1</span><b>Opener</b><small>132 BPM · 4/4</small></div>
+              <div class="song"><span class="num">2</span><b>Ballad in Seven</b><small>68 BPM · 7/4</small></div>
+              <div class="song"><span class="num">3</span><b>Three Against Four</b><small>96 BPM · 3:4</small></div>
+            </div>
+          </div>
+          <h3>Setlists</h3>
+          <p>Save a setup as a song, put songs in order and keep a setlist for every band or gig. Share a setlist with AirDrop, Messages or Mail.</p>
+        </article>
+
+        <article class="card feature">
+          <div class="art" aria-hidden="true">
+            <div class="art-sound">
+              <span class="chip">Digital</span><span class="chip">Analog</span><span class="chip on">Wooden</span><span class="chip">Blip</span><span class="chip">Electro</span><span class="chip">Shaker</span><span class="chip">Tambourine</span><span class="chip">Cowbell</span><span class="chip">Claves</span><span class="chip">Drum Kit</span>
+            </div>
+          </div>
+          <h3>Sounds and Feel</h3>
+          <p>Ten sound sets and tap tempo, up to 1200 BPM. An optional pendulum and screen flash, and it can play over your music or backing tracks.</p>
+        </article>
+      </div>
+
+      <div class="facts">
+        <div class="card fact"><span class="n">10–1200</span><span class="l">BPM</span></div>
+        <div class="card fact"><span class="n">1–32</span><span class="l">Beats per bar</span></div>
+        <div class="card fact"><span class="n">8</span><span class="l">Poly lines</span></div>
+        <div class="card fact"><span class="n">10</span><span class="l">Sound sets</span></div>
+      </div>
+
+      <div class="cta">
+        <img src="images/app-icon.png" alt="" width="96" height="96">
+        <h2>Ready When You Are</h2>
+        <p class="muted">Questions before you start? The <a href="support.html">Support</a> page has answers.</p>
+        <span class="store"><span class="dot" aria-hidden="true"></span>Coming Soon to the App Store</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span class="muted">Polypulser for iPhone</span>
+    <nav aria-label="Footer"><a href="support.html">Support</a><a href="privacy.html">Privacy Policy</a></nav>
+  </div>
+</footer>
+</body>
+</html>
