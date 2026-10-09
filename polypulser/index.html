@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Polypulser – Metronome for iPhone</title>
+<title>Polypulser – Metronome for iOS and Android</title>
 <meta name="description" content="A metronome for practising and performing. Give every beat its own accent and rhythm, play polyrhythms and keep your songs in setlists. No account, no ads, works offline.">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
@@ -29,6 +29,9 @@
     <symbol id="i-plus" viewBox="0 0 24 24"><path d="M10.5 2h3v8.5H22v3h-8.5V22h-3v-8.5H2v-3h8.5z"/></symbol>
     <symbol id="i-minus" viewBox="0 0 24 24"><rect x="2" y="10.5" width="20" height="3" rx="1"/></symbol>
     <symbol id="i-tap" viewBox="0 0 24 24"><path d="M9 2.5a2 2 0 0 1 2 2V11l1-.2V9a2 2 0 0 1 4 0v2.3a2 2 0 0 1 3 1.7v4.5A6.5 6.5 0 0 1 12.5 24h-1a6 6 0 0 1-5-2.7L3 16a1.8 1.8 0 0 1 2.7-2.3L7 15V4.5a2 2 0 0 1 2-2z"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><g fill="currentColor"><circle cx="4" cy="6" r="2"/><circle cx="4" cy="12" r="2"/><circle cx="4" cy="18" r="2"/><rect x="8.5" y="5" width="13" height="2" rx="1"/><rect x="8.5" y="11" width="13" height="2" rx="1"/><rect x="8.5" y="17" width="13" height="2" rx="1"/></g></symbol>
+    <symbol id="i-metronome" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"><path d="M9 3h6l5 18H4z"/><path d="M12 17 18 5"/></g></symbol>
+    <symbol id="i-poly" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="3.5" rx="1"/><circle cx="5" cy="13" r="2.4"/><circle cx="12" cy="13" r="2.4"/><circle cx="19" cy="13" r="2.4"/><circle cx="5" cy="20" r="2.4"/><circle cx="12" cy="20" r="2.4"/><circle cx="19" cy="20" r="2.4"/></g></symbol>
     <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 3 2.5 9.5 9 16v-4.5h6a3.5 3.5 0 0 1 0 7h-3V22h3a7 7 0 0 0 0-14H9z"/></symbol>
   </defs>
 </svg>
@@ -52,12 +55,11 @@
         <p class="lede muted">Set a tempo, choose how many beats a bar has, and give every beat its own accent and rhythm. Play polyrhythms, and keep your songs in setlists.</p>
         <!-- Replace with the App Store link once the app is live. -->
         <span class="store"><span class="dot" aria-hidden="true"></span>Coming Soon to the App Stores</span>
-        <p class="requirements muted">For iPhone with iOS 18 or later and Android 12 or later. No account, no ads, works offline.</p>
+        <p class="requirements muted">For iOS 18 or later and Android 12 or later. No account, no ads, works offline.</p>
       </div>
 
-      <div class="device" role="img" aria-label="The Basic screen: tempo 120 BPM Allegro, a bar of seven beats on two lines, each with its own accent and rhythm, and the Play and Tap buttons.">
+      <div class="device" role="img" aria-label="The Basic screen: tempo 120 BPM, a bar of seven beats on two lines, each with its own accent and rhythm, and the Play and Tap buttons.">
         <div class="card tempo">
-          <div class="marking">Allegro</div>
           <div class="controls">
             <span class="circle-btn"><svg><use href="#i-minus"/></svg></span>
             <span class="value"><span class="n">120</span><span class="u">BPM</span></span>
@@ -92,7 +94,7 @@
         <li>No ads</li>
         <li>No tracking</li>
         <li>Works offline</li>
-        <li>Nothing leaves your iPhone</li>
+        <li>Nothing leaves your phone</li>
       </ul>
     </div>
   </section>
@@ -133,29 +135,46 @@
     </div>
   </section>
 
-  <section class="showcase showcase-flip" aria-labelledby="poly-title">
+  <section class="poly" aria-labelledby="poly-title">
     <div class="wrap">
-      <div class="showcase-copy">
+      <div class="poly-intro">
         <h2 class="section-title" id="poly-title">Polyrhythms, Two Ways</h2>
-        <p class="section-lede muted">Up to 8 lines, each with 1 to 13 notes spread evenly across one bar of 4/4, and each with its own sound.</p>
-        <dl class="modes">
-          <div><dt>Sequential</dt><dd>The lines take turns. Each plays for one bar, from top to bottom, then it starts again at the top.</dd></div>
-          <div><dt>Parallel</dt><dd>The lines you tick play at the same time, so you hear them against each other, like three against four.</dd></div>
-        </dl>
-        <p class="muted">Switch with the Sequential&nbsp;|&nbsp;Parallel control at the top of the Poly screen.</p>
+        <p class="section-lede muted">Up to 8 lines, each with 1 to 16 notes spread evenly across one bar of 4/4, and each with its own sound. Switch with the Sequential&nbsp;|&nbsp;Parallel control at the top of the Poly screen.</p>
       </div>
 
-      <div class="poly-demo">
-        <div class="card pl-panel" role="img" aria-label="Sequential: three lines with 3, 4 and 5 notes play one after another, one bar each.">
-          <div class="seg" aria-hidden="true"><span class="on">Sequential</span><span>Parallel</span></div>
-          <p class="pl-caption">One line after another</p>
-          <div class="pl-lines seq" aria-hidden="true"><div class="pl-row" style="--delay:-0s"><div class="pl-track"><span class="beat accent" style="--x:0;--delay:-0s"></span><span class="beat" style="--x:0.333;--delay:-5.333s"></span><span class="beat" style="--x:0.667;--delay:-4.667s"></span><span class="pl-head"></span></div><span class="pl-count">3</span></div><div class="pl-row" style="--delay:-4s"><div class="pl-track"><span class="beat accent" style="--x:0;--delay:-4s"></span><span class="beat" style="--x:0.25;--delay:-3.5s"></span><span class="beat secondary" style="--x:0.5;--delay:-3s"></span><span class="beat" style="--x:0.75;--delay:-2.5s"></span><span class="pl-head"></span></div><span class="pl-count">4</span></div><div class="pl-row" style="--delay:-2s"><div class="pl-track"><span class="beat accent" style="--x:0;--delay:-2s"></span><span class="beat" style="--x:0.2;--delay:-1.6s"></span><span class="beat" style="--x:0.4;--delay:-1.2s"></span><span class="beat" style="--x:0.6;--delay:-0.8s"></span><span class="beat" style="--x:0.8;--delay:-0.4s"></span><span class="pl-head"></span></div><span class="pl-count">5</span></div></div>
+      <div class="poly-modes">
+        <article class="card mode">
+          <div class="pl-panel" role="img" aria-label="Sequential: three lines with 3, 4 and 5 notes play one after another, one bar each. The 5-note line is unticked, so it keeps its turn without sound.">
+            <div class="seg" aria-hidden="true"><span class="on">Sequential</span><span>Parallel</span></div>
+            <div class="pl-lines seq" aria-hidden="true"><div class="pl-row" style="--delay:-0s"><span class="pl-tick on"></span><div class="pl-track"><span class="beat accent" style="--x:0;--delay:-0s"></span><span class="beat" style="--x:0.333;--delay:-5.333s"></span><span class="beat" style="--x:0.667;--delay:-4.667s"></span><span class="pl-head"></span></div><span class="pl-count">3</span></div><div class="pl-row" style="--delay:-4s"><span class="pl-tick on"></span><div class="pl-track"><span class="beat accent" style="--x:0;--delay:-4s"></span><span class="beat" style="--x:0.25;--delay:-3.5s"></span><span class="beat secondary" style="--x:0.5;--delay:-3s"></span><span class="beat" style="--x:0.75;--delay:-2.5s"></span><span class="pl-head"></span></div><span class="pl-count">4</span></div><div class="pl-row pl-mute" style="--delay:-2s"><span class="pl-tick"></span><div class="pl-track"><span class="beat accent" style="--x:0;--delay:-2s"></span><span class="beat" style="--x:0.2;--delay:-1.6s"></span><span class="beat" style="--x:0.4;--delay:-1.2s"></span><span class="beat" style="--x:0.6;--delay:-0.8s"></span><span class="beat" style="--x:0.8;--delay:-0.4s"></span><span class="pl-head"></span></div><span class="pl-count">5</span></div></div>
+          </div>
+          <h3>Sequential</h3>
+          <p>The lines take turns. Each plays for one bar, from top to bottom, then it starts again at the top. Untick a line to mute it while it keeps its turn.</p>
+        </article>
+        <article class="card mode">
+          <div class="pl-panel" role="img" aria-label="Parallel: the ticked lines with 3 and 4 notes play together, three against four. The unticked line with 5 notes stays silent.">
+            <div class="seg" aria-hidden="true"><span>Sequential</span><span class="on">Parallel</span></div>
+            <div class="pl-lines par" aria-hidden="true"><div class="pl-row"><span class="pl-tick on"></span><div class="pl-track"><span class="beat accent" style="--x:0;--delay:-0s"></span><span class="beat" style="--x:0.333;--delay:-1.333s"></span><span class="beat" style="--x:0.667;--delay:-0.667s"></span><span class="pl-head"></span></div><span class="pl-count">3</span></div><div class="pl-row"><span class="pl-tick on"></span><div class="pl-track"><span class="beat accent" style="--x:0;--delay:-0s"></span><span class="beat" style="--x:0.25;--delay:-1.5s"></span><span class="beat secondary" style="--x:0.5;--delay:-1s"></span><span class="beat" style="--x:0.75;--delay:-0.5s"></span><span class="pl-head"></span></div><span class="pl-count">4</span></div><div class="pl-row pl-off"><span class="pl-tick"></span><div class="pl-track"><span class="beat accent" style="--x:0"></span><span class="beat" style="--x:0.2"></span><span class="beat" style="--x:0.4"></span><span class="beat" style="--x:0.6"></span><span class="beat" style="--x:0.8"></span></div><span class="pl-count">5</span></div></div>
+          </div>
+          <h3>Parallel</h3>
+          <p>The lines you tick play at the same time, so you hear them against each other, like three against four.</p>
+        </article>
+      </div>
+
+      <div class="poly-grid">
+        <div class="poly-grid-copy">
+          <h3>Find the Golden Ratio</h3>
+          <p>In full screen, optional grid lines mark three points in the bar, so you can see which notes fall closest to the golden ratio.</p>
+          <ul class="grid-legend">
+            <li><span class="gl" aria-hidden="true"></span><b>½</b><span>The half bar</span></li>
+            <li><span class="gl gl-dashed" aria-hidden="true"></span><b>φ</b><span>The golden ratio, 0.618 of the bar</span></li>
+            <li><span class="gl gl-dotted" aria-hidden="true"></span><b>⅔</b><span>The shuffle point</span></li>
+          </ul>
+          <p class="muted">In the picture, the ninth of 13 notes lands almost exactly on φ: it starts 8/13 of the way through the bar, about 0.615.</p>
         </div>
-        <div class="card pl-panel" role="img" aria-label="Parallel: the ticked lines with 3 and 4 notes play together, three against four. The unticked line with 5 notes stays silent.">
-          <div class="seg" aria-hidden="true"><span>Sequential</span><span class="on">Parallel</span></div>
-          <p class="pl-caption">Ticked lines together</p>
-          <div class="pl-lines par" aria-hidden="true"><div class="pl-row"><span class="pl-tick on"></span><div class="pl-track"><span class="beat accent" style="--x:0;--delay:-0s"></span><span class="beat" style="--x:0.333;--delay:-1.333s"></span><span class="beat" style="--x:0.667;--delay:-0.667s"></span><span class="pl-head"></span></div><span class="pl-count">3</span></div><div class="pl-row"><span class="pl-tick on"></span><div class="pl-track"><span class="beat accent" style="--x:0;--delay:-0s"></span><span class="beat" style="--x:0.25;--delay:-1.5s"></span><span class="beat secondary" style="--x:0.5;--delay:-1s"></span><span class="beat" style="--x:0.75;--delay:-0.5s"></span><span class="pl-head"></span></div><span class="pl-count">4</span></div><div class="pl-row pl-off"><span class="pl-tick"></span><div class="pl-track"><span class="beat accent" style="--x:0"></span><span class="beat" style="--x:0.2"></span><span class="beat" style="--x:0.4"></span><span class="beat" style="--x:0.6"></span><span class="beat" style="--x:0.8"></span></div><span class="pl-count">5</span></div></div>
-        </div>
+        <figure class="phone" role="img" aria-label="The Poly screen in full screen with grid lines at ½, φ (golden ratio) and ⅔ of the bar, across four lines with 3, 4, 7 and 13 notes. In each line the note closest to the golden ratio plays and the others are silent; the ninth of the 13 notes sits right on the φ line.">
+          <svg class="pg" viewBox="0 0 660 1433" aria-hidden="true" focusable="false"><rect class="pg-fill" x="135" y="129" width="390" height="48" rx="24"/><rect class="pg-thumb" x="139" y="133" width="188" height="40" rx="20"/><text class="pg-seg pg-seg-on" x="233" y="160" text-anchor="middle">Sequential</text><text class="pg-seg" x="427" y="160" text-anchor="middle">Parallel</text><circle class="pg-fill" cx="602" cy="150" r="32"/><path class="pg-x" d="M591 139 L613 161 M613 139 L591 161"/><g class="pg-grid"><line x1="106" y1="224" x2="106" y2="1256"/><line x1="626" y1="224" x2="626" y2="1256"/><line x1="366.0" y1="224" x2="366.0" y2="1256"/><line class="pg-dash" x1="427.4" y1="224" x2="427.4" y2="1256"/><line class="pg-dot" x1="452.7" y1="224" x2="452.7" y2="1256"/></g><g class="pg-label"><text x="366.0" y="214" text-anchor="middle">½</text><text x="423.4" y="214" text-anchor="middle">φ</text><text x="458.7" y="214" text-anchor="middle">⅔</text></g><line class="pg-track" x1="106" y1="348" x2="626" y2="348"/><circle class="pg-tick" cx="51" cy="348" r="16"/><path class="pg-check" d="M43 348 l5.5 6 l10 -12"/><circle class="pg-note on" cx="106.0" cy="348" r="15"/><circle class="pg-note" cx="279.3" cy="348" r="15"/><circle class="pg-note on" cx="452.7" cy="348" r="15"/><line class="pg-track" x1="106" y1="609" x2="626" y2="609"/><circle class="pg-tick" cx="51" cy="609" r="16"/><path class="pg-check" d="M43 609 l5.5 6 l10 -12"/><circle class="pg-note on" cx="106.0" cy="609" r="15"/><circle class="pg-note" cx="236.0" cy="609" r="15"/><circle class="pg-note on" cx="366.0" cy="609" r="15"/><circle class="pg-note" cx="496.0" cy="609" r="15"/><line class="pg-track" x1="106" y1="871" x2="626" y2="871"/><circle class="pg-tick" cx="51" cy="871" r="16"/><path class="pg-check" d="M43 871 l5.5 6 l10 -12"/><circle class="pg-note on" cx="106.0" cy="871" r="15"/><circle class="pg-note" cx="180.3" cy="871" r="15"/><circle class="pg-note" cx="254.6" cy="871" r="15"/><circle class="pg-note" cx="328.9" cy="871" r="15"/><circle class="pg-note on" cx="403.1" cy="871" r="15"/><circle class="pg-note" cx="477.4" cy="871" r="15"/><circle class="pg-note" cx="551.7" cy="871" r="15"/><line class="pg-track" x1="106" y1="1132" x2="626" y2="1132"/><circle class="pg-tick" cx="51" cy="1132" r="16"/><path class="pg-check" d="M43 1132 l5.5 6 l10 -12"/><circle class="pg-note on" cx="106.0" cy="1132" r="15"/><circle class="pg-note" cx="146.0" cy="1132" r="15"/><circle class="pg-note" cx="186.0" cy="1132" r="15"/><circle class="pg-note" cx="226.0" cy="1132" r="15"/><circle class="pg-note" cx="266.0" cy="1132" r="15"/><circle class="pg-note" cx="306.0" cy="1132" r="15"/><circle class="pg-note" cx="346.0" cy="1132" r="15"/><circle class="pg-note" cx="386.0" cy="1132" r="15"/><circle class="pg-note on" cx="426.0" cy="1132" r="15"/><circle class="pg-note" cx="466.0" cy="1132" r="15"/><circle class="pg-note" cx="506.0" cy="1132" r="15"/><circle class="pg-note" cx="546.0" cy="1132" r="15"/><circle class="pg-note" cx="586.0" cy="1132" r="15"/><circle class="pg-play" cx="593" cy="1316" r="42"/><path class="pg-play-icon" d="M581 1296 v40 l33 -20 z"/></svg>
+        </figure>
       </div>
     </div>
   </section>
@@ -191,7 +210,7 @@
             </div>
           </div>
           <h3>A Rhythm for Every Beat</h3>
-          <p>Quarters, eighths and every combination of sixteenth notes and rests, written with dotted notes where possible. Eighth and sixteenth triplets too.</p>
+          <p>Quarters, eighths and every combination of sixteenth notes and rests, written with dotted notes where possible. Eighth triplets too, and all 64 sixteenth-note triplet rhythms. The picker stays open so you can try them while it plays.</p>
         </article>
 
         <article class="card feature">
@@ -204,36 +223,57 @@
 
         <article class="card feature">
           <div class="art" aria-hidden="true">
-            <div class="art-tempo">
-              <div class="marking-row"><span class="chev">‹</span><span class="marking">Allegro</span><span class="chev">›</span></div>
-              <div class="n">120</div>
-              <div class="range">120–155 BPM</div>
+            <div class="art-watches">
+              <svg class="watch watch-apple" viewBox="-16 -16 448 528"><title>Apple Watch</title>
+                <rect class="w-case" x="-8" y="-8" width="432" height="512" rx="104"/>
+                <rect class="w-face" x="0" y="0" width="416" height="496" rx="96"/>
+                <text class="w-txt w-strong" x="40" y="70" font-size="34">17:11</text>
+                <text class="w-txt w-tint w-strong" x="40" y="114" font-size="34">My Setlist</text>
+                <circle class="w-btn2" cx="346" cy="74" r="36"/><use class="w-ico-label" href="#i-list" x="328" y="56" width="36" height="36"/>
+                <use class="w-ico" href="#i-poly" x="62" y="164" width="36" height="36"/>
+                <text class="w-txt w-strong" x="108" y="196" font-size="34">Five Over Four</text>
+                <text class="w-txt w-muted" x="208" y="262" font-size="36" text-anchor="middle">120 BPM</text>
+                <rect class="w-play" x="34" y="316" width="348" height="112" rx="56"/><path class="w-play-icon" d="M190 342v52l42-26z"/>
+              </svg>
+              <svg class="watch watch-wear" viewBox="-20 -20 494 494"><title>Wear OS watch</title>
+                <defs><clipPath id="wear-face"><circle cx="227" cy="227" r="227"/></clipPath></defs>
+                <circle class="w-case" cx="227" cy="227" r="237"/>
+                <circle class="w-face" cx="227" cy="227" r="227"/>
+                <text class="w-txt w-muted w-strong" x="227" y="44" font-size="28" text-anchor="middle">5:09</text>
+                <text class="w-txt w-muted" x="227" y="86" font-size="28" text-anchor="middle">My Setlist</text>
+                <use class="w-ico" href="#i-metronome" x="150" y="100" width="34" height="34"/>
+                <text class="w-txt w-strong" x="194" y="129" font-size="32">Basic</text>
+                <text class="w-txt w-muted" x="227" y="176" font-size="38" text-anchor="middle">123 BPM</text>
+                <rect class="w-btn2" x="138" y="198" width="182" height="62" rx="31"/><use class="w-ico" href="#i-list" x="160" y="213" width="32" height="32"/>
+                <text class="w-txt" x="204" y="239" font-size="26">Songs</text>
+                <rect class="w-play" x="78" y="300" width="298" height="200" rx="80" clip-path="url(#wear-face)"/><path class="w-play-icon" d="M212 350v50l40-25z"/>
+              </svg>
             </div>
           </div>
-          <h3>Italian Tempo Markings</h3>
-          <p>The name above the tempo always matches it, from Larghissimo to Prestissimo. Tap it to choose from the list, or swipe on it to jump between markings.</p>
+          <h3>Watch Remote</h3>
+          <p>Start and stop the metronome from your Apple Watch or Wear OS watch and switch songs of the active setlist. Turn the crown, or the bezel, to step through the songs. Your phone keeps playing the clicks.</p>
         </article>
 
         <article class="card feature">
           <div class="art" aria-hidden="true">
             <div class="art-setlist">
-              <div class="song"><span class="num">1</span><b>Opener</b><small>132 BPM · 4/4</small></div>
-              <div class="song"><span class="num">2</span><b>Ballad in Seven</b><small>68 BPM · 7/4</small></div>
-              <div class="song"><span class="num">3</span><b>Three Against Four</b><small>96 BPM · 3:4</small></div>
+              <div class="song"><b>Opener</b><small>132 BPM · 4/4</small></div>
+              <div class="song"><b>Ballad in Seven</b><small>68 BPM · 7/4</small></div>
+              <div class="song"><b>Three Against Four</b><small>96 BPM · 3:4</small></div>
             </div>
           </div>
           <h3>Setlists</h3>
-          <p>Save a setup as a song, put songs in order and keep a setlist for every band or gig. Share a setlist with AirDrop, Messages or Mail.</p>
+          <p>Save a setup as a song, put songs in order and keep a setlist for every band or gig. Share a setlist from the share menu, for example by message or email.</p>
         </article>
 
         <article class="card feature">
           <div class="art" aria-hidden="true">
             <div class="art-sound">
-              <span class="chip">Digital</span><span class="chip">Analog</span><span class="chip on">Wooden</span><span class="chip">Blip</span><span class="chip">Electro</span><span class="chip">Shaker</span><span class="chip">Tambourine</span><span class="chip">Cowbell</span><span class="chip">Claves</span><span class="chip">Drum Kit</span>
+              <span class="chip">Digital</span><span class="chip">Analog</span><span class="chip on">Wooden</span><span class="chip">Shaker</span><span class="chip">Tambourine</span><span class="chip">Cowbell</span><span class="chip">Claves</span><span class="chip">Drum Kit</span><span class="chip">Toms</span><span class="chip">Cymbals</span>
             </div>
           </div>
           <h3>Sounds and Feel</h3>
-          <p>Ten sound sets and tap tempo, up to 1200 BPM. An optional pendulum and screen flash, and it can play over your music or backing tracks.</p>
+          <p>Ten sound sets, from digital clicks to toms and cymbals, and tap tempo up to 1200 BPM. An optional pendulum and screen flash on the Basic screen, and it can play over your music or backing tracks.</p>
         </article>
       </div>
 
@@ -248,7 +288,7 @@
         <img src="images/app-icon.png" alt="" width="96" height="96">
         <h2>Ready When You Are</h2>
         <p class="muted">Questions before you start? The <a href="support.html">Support</a> page has answers.</p>
-        <span class="store"><span class="dot" aria-hidden="true"></span>Coming Soon to the App Store</span>
+        <span class="store"><span class="dot" aria-hidden="true"></span>Coming Soon to the App Stores</span>
       </div>
     </div>
   </section>
@@ -256,7 +296,7 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <span class="muted">Polypulser for iPhone</span>
+    <span class="muted">Polypulser for iOS and Android</span>
     <nav aria-label="Footer"><a href="support.html">Support</a><a href="privacy.html">Privacy Policy</a></nav>
   </div>
 </footer>

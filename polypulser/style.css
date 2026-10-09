@@ -86,7 +86,7 @@
 
 /* Base */
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 80px; } /* clears the sticky header */
 body {
   margin: 0;
   background: var(--background);
@@ -120,7 +120,12 @@ a:hover { text-decoration-thickness: 3px; }
 .wrap { width: 100%; max-width: var(--page-width); margin: 0 auto; padding: 0 var(--gutter); }
 
 /* Header */
-.site-header { border-bottom: 1px solid var(--fill-tertiary); }
+.site-header {
+  position: sticky; top: 0; z-index: 5;
+  border-bottom: 1px solid var(--fill-tertiary);
+  background: color-mix(in srgb, var(--background) 82%, transparent);
+  -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px);
+}
 .site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: var(--space-16); min-height: 64px; }
 .brand { display: flex; align-items: center; gap: var(--space-10); font-weight: 600; font-size: 17px; text-decoration: none; }
 .brand img { width: 32px; height: 32px; border-radius: 7px; }
@@ -171,7 +176,6 @@ a:hover { text-decoration-thickness: 3px; }
 .card { background: var(--fill-quinary); border-radius: var(--module-corner); }
 
 .tempo { padding: var(--space-10) var(--space-8); text-align: center; }
-.tempo .marking { font-weight: 600; font-size: 17px; line-height: 22px; }
 .tempo .controls { display: flex; align-items: center; justify-content: center; gap: var(--space-16); }
 .tempo .value { min-width: 112px; }
 .tempo .n { display: block; font: 700 54px/64px var(--font-rounded); font-variant-numeric: tabular-nums; }
@@ -322,19 +326,63 @@ a:hover { text-decoration-thickness: 3px; }
   .ld-drag > .beat, .ld-drag-note { scale: 1.12; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.22)); }
 }
 
-/* Showcase: polyrhythm play modes (drawn like the Poly screen; one bar = 2 s at 120 BPM) */
-@media (min-width: 880px) {
-  .showcase-flip .wrap { grid-template-columns: 360px 1fr; }
-  .showcase-flip .poly-demo { order: -1; }
-}
-.modes { margin: 0 0 var(--space-16); display: grid; gap: var(--module-spacing); }
-.modes div { padding: var(--space-16) var(--space-20); background: var(--fill-quinary); border-radius: var(--module-corner); }
-.modes dt { font-weight: 700; margin-bottom: var(--space-2); }
-.modes dd { margin: 0; }
+/* Polyrhythms: the two play modes, drawn like the Poly screen (one bar = 2 s at 120 BPM) */
+.poly { padding: 88px 0 16px; }
+.poly-intro .section-lede { max-width: 40rem; }
+.poly-modes { display: grid; gap: var(--module-spacing); }
+@media (min-width: 720px) { .poly-modes { grid-template-columns: 1fr 1fr; } }
+.mode { padding: var(--space-20); display: flex; flex-direction: column; gap: var(--space-16); }
+@media (min-width: 720px) { .mode { padding: var(--space-24); } }
+.mode h3 { font-size: 20px; margin: var(--space-4) 0 0; }
+.mode p { margin: 0; font-size: 16px; }
+/* The panel is a small Poly screen, so it takes the app's background. */
+.pl-panel { padding: var(--space-16) var(--module-spacing) var(--space-10); background: var(--background); border: 1px solid var(--fill-tertiary); border-radius: var(--pattern-tile-corner); }
+.pl-panel .seg { max-width: 260px; margin: 0 auto var(--module-spacing); }
 
-.poly-demo { display: grid; gap: var(--module-spacing); width: 100%; max-width: 360px; margin: 0 auto; }
-.pl-panel { padding: var(--space-16); }
-.pl-caption { margin: var(--space-10) 0 var(--space-8); font-size: 13px; font-weight: 600; color: var(--text-muted); text-align: center; }
+/* Full-screen grid lines: a drawn rendition of the Poly full screen, framed like the hero device */
+.poly-grid { margin-top: 64px; display: grid; gap: 40px; align-items: center; }
+@media (min-width: 880px) {
+  .poly-grid { grid-template-columns: 300px 1fr; gap: 72px; }
+  .poly-grid .phone { order: -1; }
+}
+.phone {
+  margin: 0 auto; width: 100%; max-width: 280px; padding: var(--space-8);
+  background: var(--background); border: 1px solid var(--fill-tertiary); border-radius: 40px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.08);
+}
+@media (prefers-color-scheme: dark) { .phone { box-shadow: none; } }
+.pg { width: 100%; height: auto; }
+.pg text { font-family: var(--font-sans); }
+.pg-fill { fill: var(--fill-tertiary); }
+.pg-thumb { fill: var(--background); filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.15)); }
+@media (prefers-color-scheme: dark) { .pg-thumb { fill: #636366; filter: none; } }
+.pg-seg { fill: var(--label); font-size: 21px; }
+.pg-seg-on { font-weight: 600; }
+.pg-x { stroke: var(--label); stroke-width: 4; stroke-linecap: round; }
+.pg-grid line { stroke: var(--text-muted); stroke-width: 2; opacity: 0.7; }
+.pg-grid .pg-dash { stroke-dasharray: 8 6; }
+.pg-grid .pg-dot { stroke-dasharray: 2 5; stroke-linecap: round; }
+.pg-label { fill: var(--text-muted); font-size: 26px; font-weight: 600; }
+.pg-track { stroke: var(--fill-tertiary); stroke-width: 6; }
+.pg-tick { fill: var(--accent); }
+.pg-check { fill: none; stroke: #ffffff; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+/* Notes: the one nearest φ plays (Normal), the rest are Silent. */
+.pg-note { fill: var(--background); stroke: var(--beat-silent); stroke-width: 2; stroke-dasharray: 4 4; }
+.pg-note.on { fill: color-mix(in srgb, var(--beat-normal) 28%, var(--background)); stroke: var(--beat-normal); stroke-width: 3; stroke-dasharray: none; }
+.pg-play { fill: var(--accent); filter: drop-shadow(0 3px 10px rgba(242, 107, 29, 0.35)); }
+.pg-play-icon { fill: #ffffff; stroke: #ffffff; stroke-width: 4; stroke-linejoin: round; }
+.poly-grid-copy { max-width: 32rem; }
+.poly-grid-copy h3 { font-size: clamp(22px, 3vw, 28px); margin: 0 0 var(--space-8); letter-spacing: -0.015em; }
+.poly-grid-copy p { margin: 0 0 var(--space-20); }
+.poly-grid-copy p:last-child { margin: 0; font-size: 15px; }
+.grid-legend { list-style: none; margin: 0 0 var(--space-20); padding: var(--space-4) var(--space-20); background: var(--fill-quinary); border-radius: var(--module-corner); }
+.grid-legend li { display: flex; align-items: center; gap: var(--module-spacing); margin: 0; padding: var(--module-spacing) 0; }
+.grid-legend li + li { border-top: 1px solid var(--fill-tertiary); }
+.grid-legend b { width: 20px; text-align: center; font: 600 17px/1 var(--font-serif); }
+/* Line samples in the styles the app draws: ½ solid, φ dashed, ⅔ dotted. */
+.gl { flex: none; width: 0; height: 28px; border-left: 2px solid var(--text-muted); }
+.gl-dashed { border-left-style: dashed; }
+.gl-dotted { border-left-style: dotted; }
 
 .seg { display: flex; gap: var(--space-2); padding: 3px; border-radius: var(--radius-full); background: var(--fill-tertiary); }
 .seg span { flex: 1; text-align: center; padding: 5px 0; border-radius: var(--radius-full); font-size: 14px; line-height: 20px; }
@@ -346,6 +394,8 @@ a:hover { text-decoration-thickness: 3px; }
 .pl-row::before { content: ""; position: absolute; inset: 0; border-radius: 16px; background: var(--accent); opacity: 0; }
 .pl-track { position: relative; flex: 1; height: 100%; }
 .pl-track::before { content: ""; position: absolute; left: 10px; right: 10px; top: 50%; height: 3px; margin-top: -1.5px; border-radius: 2px; background: var(--fill-tertiary); }
+/* Bar end, like the closing grid line on the Poly screen */
+.pl-track::after { content: ""; position: absolute; right: 9px; top: 50%; width: 2px; height: 22px; margin-top: -11px; border-radius: 1px; background: var(--fill-tertiary); }
 .pl-track .beat { --d: 20px; position: absolute; top: 50%; margin-top: -10px; left: calc(var(--x) * (100% - 20px)); }
 .pl-count { position: relative; width: 14px; text-align: right; font: 700 13px/1 var(--font-rounded); color: var(--text-muted); }
 .pl-head { position: absolute; top: 50%; width: 3px; height: 28px; margin: -14px 0 0 -1.5px; border-radius: 2px; background: var(--accent); left: 10px; opacity: 0; }
@@ -353,6 +403,7 @@ a:hover { text-decoration-thickness: 3px; }
 .pl-tick.on { background: var(--accent); border-color: var(--accent); }
 .pl-tick.on::after { content: ""; position: absolute; left: 6px; top: 2.5px; width: 4px; height: 8px; border: solid #ffffff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
 .pl-off { opacity: 0.35; }
+.pl-mute .pl-count { opacity: 0.5; }
 
 /* Sequential: 6 s — each line gets one 2 s bar, marked by the app's light accent band. */
 .pl-lines.seq .pl-row::before { animation: pl-seq-band 6s linear infinite; animation-delay: var(--delay); }
@@ -407,23 +458,38 @@ a:hover { text-decoration-thickness: 3px; }
 .art-many { display: grid; grid-template-columns: repeat(6, 28px); gap: var(--space-8); }
 .art-many .beat { --d: 28px; }
 
-
 .art-setlist { width: 100%; max-width: 300px; background: var(--grouped-row); border-radius: 12px; overflow: hidden; border: 1px solid var(--fill-tertiary); }
 .song { display: flex; align-items: center; gap: var(--module-spacing); padding: var(--space-8) var(--module-spacing); font-size: 15px; line-height: 20px; }
 .song + .song { border-top: 1px solid var(--fill-tertiary); }
 .song b { font-weight: 400; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .song small { font-size: 13px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
-.song .num { font: 600 13px/1 var(--font-rounded); color: var(--text-muted); width: 14px; }
 
 .art-sound { width: 100%; display: flex; flex-wrap: wrap; gap: var(--space-6); justify-content: center; max-width: 300px; }
 .chip { font-size: 13px; font-weight: 600; padding: var(--space-4) var(--space-10); border-radius: var(--radius-full); background: var(--fill-tertiary); }
 .chip.on { background: var(--label); color: var(--background); }
 
-.art-tempo { text-align: center; }
-.art-tempo .n { font: 700 56px/1 var(--font-rounded); font-variant-numeric: tabular-nums; }
-.art-tempo .marking-row { display: flex; align-items: center; justify-content: center; gap: var(--module-spacing); font-weight: 600; margin-bottom: var(--space-4); }
-.art-tempo .chev { color: var(--text-muted); font-size: 20px; line-height: 1; }
-.art-tempo .range { font-size: 13px; color: var(--text-muted); }
+/* Watches: Apple Watch (rounded rectangle) and Wear OS (round), drawn like their remote screens */
+.art-watches { display: flex; align-items: center; justify-content: center; gap: var(--space-16); }
+.watch { height: auto; overflow: visible; }
+.watch-apple { width: 110px; max-width: 42%; }
+.watch-wear { width: 132px; max-width: 50%; }
+.watch text { font-family: var(--font-sans); }
+.w-case { fill: #d1d1d6; }
+.w-face { fill: var(--grouped-row); }
+.w-txt { fill: var(--label); }
+.w-strong { font-weight: 600; }
+.w-muted { fill: var(--text-muted); }
+.w-tint { fill: var(--accent); }
+.w-btn2 { fill: var(--fill-tertiary); }
+.w-ico { color: var(--accent); }
+.w-ico-label { color: var(--label); }
+.w-play { fill: var(--accent); }
+.w-play-icon { fill: #ffffff; stroke: #ffffff; stroke-width: 6; stroke-linejoin: round; }
+@media (prefers-color-scheme: dark) {
+  .w-case { fill: #3a3a3c; }
+  .w-face { fill: #000000; }
+  .w-btn2 { fill: #2c2c2e; }
+}
 
 .facts { margin-top: 56px; display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--module-spacing); }
 @media (min-width: 720px) { .facts { grid-template-columns: repeat(4, 1fr); } }
