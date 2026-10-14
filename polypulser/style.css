@@ -136,6 +136,23 @@ a:hover { text-decoration-thickness: 3px; }
 }
 .site-nav a:hover { background: var(--fill-tertiary); }
 .site-nav a[aria-current="page"] { background: var(--fill-tertiary); font-weight: 600; }
+.site-header .site-nav { margin-left: auto; }
+
+/* Language switch: a small segmented control, like the app's */
+.lang-switch { display: flex; flex: none; gap: var(--space-2); padding: 3px; border-radius: var(--radius-full); background: var(--fill-tertiary); }
+.lang-switch a { text-decoration: none; font-size: 13px; font-weight: 600; line-height: 20px; padding: 2px var(--space-8); border-radius: var(--radius-full); color: var(--text-muted); }
+.lang-switch a:hover { color: var(--label); }
+.lang-switch a[aria-current] { background: var(--background); color: var(--label); box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15); }
+@media (prefers-color-scheme: dark) { .lang-switch a[aria-current] { background: #636366; } }
+
+/* Small phones: the icon stands for the name, so navigation and language switch fit on one line. */
+@media (max-width: 479px) {
+  .site-header .wrap { gap: var(--space-8); }
+  .brand-name { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .site-nav { gap: 0; }
+  .site-nav a { padding: var(--space-6) var(--space-10); }
+  .lang-switch a { padding: 2px var(--space-6); }
+}
 
 /* Footer */
 .site-footer { border-top: 1px solid var(--fill-tertiary); margin-top: 72px; padding: var(--space-24) 0 40px; font-size: 15px; }
