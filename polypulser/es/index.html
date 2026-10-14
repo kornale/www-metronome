@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Polypulser – Metrónomo para iOS y Android</title>
+<meta name="description" content="Un metrónomo para practicar y tocar en vivo. Dale a cada pulso su propio acento y ritmo, toca polirritmos y guarda tus canciones en setlists. Sin cuenta, sin anuncios, funciona sin conexión.">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" href="../images/favicon.png">
+<link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+<link rel="stylesheet" href="../style.css?v=24aa972e">
+<link rel="alternate" hreflang="en" href="../index.html">
+<link rel="alternate" hreflang="de" href="../de/index.html">
+<link rel="alternate" hreflang="es" href="index.html">
+<link rel="alternate" hreflang="fr" href="../fr/index.html">
+<link rel="alternate" hreflang="it" href="../it/index.html">
+<link rel="alternate" hreflang="x-default" href="../index.html">
+<script src="../lang.js?v=1cbb1eb6"></script>
+</head>
+<body>
+<a class="skip" href="#main">Ir al contenido</a>
+
+<!-- Shared drawings: notation and beat marks, drawn like the app draws them. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="mark-marcato" viewBox="0 0 36 24"><path d="M3 21 L18 3 L33 21" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="mark-accent" viewBox="0 0 26 36"><path d="M3 3 L23 18 L3 33" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="n-quarter" viewBox="0 0 20 40"><ellipse cx="8" cy="32" rx="4.6" ry="3.4" transform="rotate(-20 8 32)" fill="currentColor"/><line x1="12.2" y1="31" x2="12.2" y2="6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="n-eighths" viewBox="0 0 42 40"><g fill="currentColor"><ellipse cx="8" cy="32" rx="4.6" ry="3.4" transform="rotate(-20 8 32)"/><ellipse cx="30" cy="32" rx="4.6" ry="3.4" transform="rotate(-20 30 32)"/><rect x="11.4" y="5" width="23.6" height="3.6"/></g><g stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="12.2" y1="31" x2="12.2" y2="6"/><line x1="34.2" y1="31" x2="34.2" y2="6"/></g></symbol>
+    <symbol id="n-sixteenths" viewBox="0 0 72 40"><g fill="currentColor"><ellipse cx="8" cy="32" rx="4.6" ry="3.4" transform="rotate(-20 8 32)"/><ellipse cx="26" cy="32" rx="4.6" ry="3.4" transform="rotate(-20 26 32)"/><ellipse cx="44" cy="32" rx="4.6" ry="3.4" transform="rotate(-20 44 32)"/><ellipse cx="62" cy="32" rx="4.6" ry="3.4" transform="rotate(-20 62 32)"/><rect x="11.4" y="5" width="55.6" height="3.4"/><rect x="11.4" y="11" width="55.6" height="3.4"/></g><g stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="12.2" y1="31" x2="12.2" y2="6"/><line x1="30.2" y1="31" x2="30.2" y2="6"/><line x1="48.2" y1="31" x2="48.2" y2="6"/><line x1="66.2" y1="31" x2="66.2" y2="6"/></g></symbol>
+    <symbol id="n-dotted" viewBox="0 0 48 40"><g fill="currentColor"><ellipse cx="8" cy="32" rx="4.6" ry="3.4" transform="rotate(-20 8 32)"/><circle cx="16.5" cy="30" r="1.8"/><ellipse cx="36" cy="32" rx="4.6" ry="3.4" transform="rotate(-20 36 32)"/><rect x="11.4" y="5" width="29.4" height="3.4"/><rect x="33" y="11" width="7.8" height="3.4"/></g><g stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="12.2" y1="31" x2="12.2" y2="6"/><line x1="40.2" y1="31" x2="40.2" y2="6"/></g></symbol>
+    <symbol id="n-triplet" viewBox="0 -4 60 44"><g fill="currentColor"><ellipse cx="8" cy="32" rx="4.6" ry="3.4" transform="rotate(-20 8 32)"/><ellipse cx="28" cy="32" rx="4.6" ry="3.4" transform="rotate(-20 28 32)"/><ellipse cx="48" cy="32" rx="4.6" ry="3.4" transform="rotate(-20 48 32)"/><rect x="11.4" y="11" width="41.4" height="3.4"/><text x="32" y="5" text-anchor="middle" font-family="ui-serif, 'New York', Georgia, serif" font-style="italic" font-weight="600" font-size="11">3</text></g><g stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="12.2" y1="31" x2="12.2" y2="12"/><line x1="32.2" y1="31" x2="32.2" y2="12"/><line x1="52.2" y1="31" x2="52.2" y2="12"/></g></symbol>
+    <symbol id="n-rest-eighth" viewBox="0 0 42 40"><path fill="currentColor" d="M6 16.5a2.3 2.3 0 1 1 3.4 2 7 7 0 0 0 4.4-3.3l1.4.5L10.6 32H8.8l3.3-11.8a8 8 0 0 1-6.1-3.7z"/><ellipse cx="28" cy="32" rx="4.6" ry="3.4" transform="rotate(-20 28 32)" fill="currentColor"/><line x1="32.2" y1="31" x2="32.2" y2="6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path fill="currentColor" d="M32.2 6c0 5 6.5 7 4.5 15 1.2-6.5-4.5-8-4.5-10z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M6 3.5v17a1 1 0 0 0 1.5.86l14-8.5a1 1 0 0 0 0-1.72l-14-8.5A1 1 0 0 0 6 3.5z"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M10.5 2h3v8.5H22v3h-8.5V22h-3v-8.5H2v-3h8.5z"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><rect x="2" y="10.5" width="20" height="3" rx="1"/></symbol>
+    <symbol id="i-tap" viewBox="0 0 24 24"><path d="M9 2.5a2 2 0 0 1 2 2V11l1-.2V9a2 2 0 0 1 4 0v2.3a2 2 0 0 1 3 1.7v4.5A6.5 6.5 0 0 1 12.5 24h-1a6 6 0 0 1-5-2.7L3 16a1.8 1.8 0 0 1 2.7-2.3L7 15V4.5a2 2 0 0 1 2-2z"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><g fill="currentColor"><circle cx="4" cy="6" r="2"/><circle cx="4" cy="12" r="2"/><circle cx="4" cy="18" r="2"/><rect x="8.5" y="5" width="13" height="2" rx="1"/><rect x="8.5" y="11" width="13" height="2" rx="1"/><rect x="8.5" y="17" width="13" height="2" rx="1"/></g></symbol>
+    <symbol id="i-metronome" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"><path d="M9 3h6l5 18H4z"/><path d="M12 17 18 5"/></g></symbol>
+    <symbol id="i-poly" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="3.5" rx="1"/><circle cx="5" cy="13" r="2.4"/><circle cx="12" cy="13" r="2.4"/><circle cx="19" cy="13" r="2.4"/><circle cx="5" cy="20" r="2.4"/><circle cx="12" cy="20" r="2.4"/><circle cx="19" cy="20" r="2.4"/></g></symbol>
+    <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 3 2.5 9.5 9 16v-4.5h6a3.5 3.5 0 0 1 0 7h-3V22h3a7 7 0 0 0 0-14H9z"/></symbol>
+  </defs>
+</svg>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-current="page"><img src="../images/app-icon.png" alt="" width="32" height="32"><span class="brand-name">Polypulser</span></a>
+    <nav class="site-nav" aria-label="Navegación principal">
+      <a href="support.html">Ayuda</a>
+      <a href="privacy.html">Privacidad</a>
+    </nav>
+    <details class="lang-menu">
+      <summary><span class="sr-only">Idioma: Español</span><span aria-hidden="true">ES</span></summary>
+      <ul>
+        <li><a href="../index.html" hreflang="en" lang="en" data-lang="en">English</a></li>
+        <li><a href="../de/index.html" hreflang="de" lang="de" data-lang="de">Deutsch</a></li>
+        <li><a href="index.html" hreflang="es" lang="es" data-lang="es" aria-current="true">Español</a></li>
+        <li><a href="../fr/index.html" hreflang="fr" lang="fr" data-lang="fr">Français</a></li>
+        <li><a href="../it/index.html" hreflang="it" lang="it" data-lang="it">Italiano</a></li>
+      </ul>
+    </details>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Polypulser</h1>
+        <p class="tagline">Un metrónomo para practicar y tocar en vivo.</p>
+        <p class="lede muted">Fija un tempo, elige cuántos pulsos tiene un compás y dale a cada pulso su propio acento y ritmo. Toca polirritmos y guarda tus canciones en setlists.</p>
+        <!-- Replace with the App Store link once the app is live. -->
+        <span class="store"><span class="dot" aria-hidden="true"></span>Próximamente en las tiendas de apps</span>
+        <p class="requirements muted">Para iOS 18 o posterior y Android 12 o posterior. Sin cuenta, sin anuncios, funciona sin conexión.</p>
+      </div>
+
+      <div class="device" role="img" aria-label="La pantalla Basic: tempo 120 BPM, un compás de siete pulsos en dos filas, cada uno con su propio acento y ritmo, y los botones Iniciar y Tap.">
+        <div class="card tempo">
+          <div class="controls">
+            <span class="circle-btn"><svg><use href="#i-minus"/></svg></span>
+            <span class="value"><span class="n">120</span><span class="u">BPM</span></span>
+            <span class="circle-btn"><svg><use href="#i-plus"/></svg></span>
+          </div>
+        </div>
+        <div class="card beats">
+          <div class="beat-line">
+            <div class="beat-cell"><span class="beat accent play-anim" style="--i:0"><svg class="mark"><use href="#mark-marcato"/></svg></span><svg class="notes" width="18" height="26"><use href="#n-quarter"/></svg></div>
+            <div class="beat-cell"><span class="beat play-anim" style="--i:1"></span><svg class="notes" width="28" height="26"><use href="#n-eighths"/></svg></div>
+            <div class="beat-cell"><span class="beat secondary play-anim" style="--i:2"><svg class="mark"><use href="#mark-accent"/></svg></span><svg class="notes" width="32" height="26"><use href="#n-dotted"/></svg></div>
+            <div class="beat-cell"><span class="beat play-anim" style="--i:3"></span><svg class="notes" width="28" height="26"><use href="#n-rest-eighth"/></svg></div>
+          </div>
+          <div class="beat-line">
+            <div class="beat-cell"><span class="beat secondary play-anim" style="--i:4"><svg class="mark"><use href="#mark-accent"/></svg></span><svg class="notes" width="40" height="26"><use href="#n-triplet"/></svg></div>
+            <div class="beat-cell"><span class="beat play-anim" style="--i:5"></span><svg class="notes" width="48" height="26"><use href="#n-sixteenths"/></svg></div>
+            <div class="beat-cell"><span class="beat play-anim" style="--i:6"></span><svg class="notes" width="28" height="26"><use href="#n-eighths"/></svg></div>
+          </div>
+        </div>
+        <div class="transport">
+          <span class="play"><svg><use href="#i-play"/></svg></span>
+          <span class="tap"><svg><use href="#i-tap"/></svg><span>TAP</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="promise" aria-label="Privacidad">
+    <div class="wrap">
+      <ul>
+        <li>Sin cuenta</li>
+        <li>Sin anuncios</li>
+        <li>Sin rastreo</li>
+        <li>Funciona sin conexión</li>
+        <li>Nada sale de tu teléfono</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="showcase" aria-labelledby="lines-title">
+    <div class="wrap">
+      <div class="showcase-copy">
+        <h2 class="section-title" id="lines-title">Ordena los pulsos en filas</h2>
+        <p class="section-lede muted">Organiza el compás como lo cuentas.</p>
+        <ol class="showcase-steps">
+          <li><span>Mantén presionado un pulso hasta que se levante.</span></li>
+          <li><span>Arrástralo a otra fila o a <strong>Nueva fila</strong>, arriba o abajo.</span></li>
+          <li><span>Suéltalo. Cada fila puede tener un número distinto de pulsos, por ejemplo 1 + 3 + 3 para un compás de 7.</span></li>
+        </ol>
+        <p class="muted">La flecha circular de la esquina restablece la distribución automática. Las filas se guardan con la canción y se mantienen en pantalla completa.</p>
+      </div>
+
+      <div class="card line-demo" role="img" aria-label="Un compás de siete pulsos en dos filas, cuatro y tres. El primer pulso se mantiene presionado, se levanta y se arrastra a Nueva fila sobre la fila superior. El compás pasa a tener tres filas: uno, tres y tres pulsos, y aparece un botón para restablecer.">
+        <div class="ld-stage">
+          <div class="ld-layer ld-before">
+            <span class="ld-line" style="--x0:12;--y0:62;--w:296;--h:98"></span>
+            <span class="ld-line" style="--x0:50;--y0:176;--w:220;--h:98"></span>
+            <span class="ld-zone" style="--y0:14"><span>+ Nueva fila</span></span>
+            <span class="ld-zone ld-zone-bottom" style="--y0:284"><span>+ Nueva fila</span></span>
+            <span class="ld-beat beat secondary" style="--x:123.5;--y:96"><svg class="mark"><use href="#mark-accent"/></svg></span><svg class="ld-note" style="--x:123.5;--y:144.0" width="26" height="22"><use href="#n-eighths"/></svg><span class="ld-beat beat secondary" style="--x:196.5;--y:96"><svg class="mark"><use href="#mark-accent"/></svg></span><svg class="ld-note" style="--x:196.5;--y:144.0" width="14" height="22"><use href="#n-quarter"/></svg><span class="ld-beat beat secondary" style="--x:269.5;--y:96"><svg class="mark"><use href="#mark-accent"/></svg></span><svg class="ld-note" style="--x:269.5;--y:144.0" width="40" height="22"><use href="#n-sixteenths"/></svg><span class="ld-beat beat " style="--x:87;--y:212"></span><svg class="ld-note" style="--x:87;--y:260.0" width="32" height="22"><use href="#n-triplet"/></svg><span class="ld-beat beat " style="--x:160;--y:212"></span><svg class="ld-note" style="--x:160;--y:260.0" width="32" height="22"><use href="#n-triplet"/></svg><span class="ld-beat beat " style="--x:233;--y:212"></span><svg class="ld-note" style="--x:233;--y:260.0" width="32" height="22"><use href="#n-triplet"/></svg>
+          </div>
+          <div class="ld-drag" style="--x:50.5;--y:96">
+            <span class="beat accent"><svg class="mark"><use href="#mark-marcato"/></svg></span>
+            <svg class="ld-drag-note" width="14" height="22"><use href="#n-quarter"/></svg>
+            <span class="ld-finger"></span>
+          </div>
+          <div class="ld-layer ld-after">
+            <span class="ld-beat beat accent" style="--x:160;--y:48"><svg class="mark"><use href="#mark-marcato"/></svg></span><svg class="ld-note" style="--x:160;--y:98.0" width="14" height="22"><use href="#n-quarter"/></svg><span class="ld-beat beat secondary" style="--x:76;--y:150"><svg class="mark"><use href="#mark-accent"/></svg></span><svg class="ld-note" style="--x:76;--y:200.0" width="26" height="22"><use href="#n-eighths"/></svg><span class="ld-beat beat secondary" style="--x:160;--y:150"><svg class="mark"><use href="#mark-accent"/></svg></span><svg class="ld-note" style="--x:160;--y:200.0" width="14" height="22"><use href="#n-quarter"/></svg><span class="ld-beat beat secondary" style="--x:244;--y:150"><svg class="mark"><use href="#mark-accent"/></svg></span><svg class="ld-note" style="--x:244;--y:200.0" width="40" height="22"><use href="#n-sixteenths"/></svg><span class="ld-beat beat " style="--x:76;--y:252"></span><svg class="ld-note" style="--x:76;--y:302.0" width="32" height="22"><use href="#n-triplet"/></svg><span class="ld-beat beat " style="--x:160;--y:252"></span><svg class="ld-note" style="--x:160;--y:302.0" width="32" height="22"><use href="#n-triplet"/></svg><span class="ld-beat beat " style="--x:244;--y:252"></span><svg class="ld-note" style="--x:244;--y:302.0" width="32" height="22"><use href="#n-triplet"/></svg>
+            <span class="ld-reset"><svg><use href="#i-undo"/></svg></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="poly" aria-labelledby="poly-title">
+    <div class="wrap">
+      <div class="poly-intro">
+        <h2 class="section-title" id="poly-title">Polirritmos de dos maneras</h2>
+        <p class="section-lede muted">Hasta 8 voces, cada una con 1 a 16 notas repartidas por igual en un compás de 4/4, y cada una con su propio sonido. Cambia de modo con el selector Secuencial&nbsp;|&nbsp;Paralelo en la parte superior de la pantalla Poly.</p>
+      </div>
+
+      <div class="poly-modes">
+        <article class="card mode">
+          <div class="pl-panel" role="img" aria-label="Secuencial: tres voces de 3, 4 y 5 notas suenan una tras otra, un compás cada una. La voz de 5 notas está desmarcada, así que conserva su turno sin sonar.">
+            <div class="seg" aria-hidden="true"><span class="on">Secuencial</span><span>Paralelo</span></div>
+            <div class="pl-lines seq" aria-hidden="true"><div class="pl-row" style="--delay:-0s"><span class="pl-tick on"></span><div class="pl-track"><span class="beat accent" style="--x:0;--delay:-0s"></span><span class="beat" style="--x:0.333;--delay:-5.333s"></span><span class="beat" style="--x:0.667;--delay:-4.667s"></span><span class="pl-head"></span></div><span class="pl-count">3</span></div><div class="pl-row" style="--delay:-4s"><span class="pl-tick on"></span><div class="pl-track"><span class="beat accent" style="--x:0;--delay:-4s"></span><span class="beat" style="--x:0.25;--delay:-3.5s"></span><span class="beat secondary" style="--x:0.5;--delay:-3s"></span><span class="beat" style="--x:0.75;--delay:-2.5s"></span><span class="pl-head"></span></div><span class="pl-count">4</span></div><div class="pl-row pl-mute" style="--delay:-2s"><span class="pl-tick"></span><div class="pl-track"><span class="beat accent" style="--x:0;--delay:-2s"></span><span class="beat" style="--x:0.2;--delay:-1.6s"></span><span class="beat" style="--x:0.4;--delay:-1.2s"></span><span class="beat" style="--x:0.6;--delay:-0.8s"></span><span class="beat" style="--x:0.8;--delay:-0.4s"></span><span class="pl-head"></span></div><span class="pl-count">5</span></div></div>
+          </div>
+          <h3>Secuencial</h3>
+          <p>Las voces se turnan. Cada una suena durante un compás, de arriba abajo, y luego se empieza de nuevo arriba. Desmarca una voz para silenciarla: conserva su turno.</p>
+        </article>
+        <article class="card mode">
+          <div class="pl-panel" role="img" aria-label="Paralelo: las voces marcadas de 3 y 4 notas suenan juntas, tres contra cuatro. La voz desmarcada de 5 notas queda en silencio.">
+            <div class="seg" aria-hidden="true"><span>Secuencial</span><span class="on">Paralelo</span></div>
+            <div class="pl-lines par" aria-hidden="true"><div class="pl-row"><span class="pl-tick on"></span><div class="pl-track"><span class="beat accent" style="--x:0;--delay:-0s"></span><span class="beat" style="--x:0.333;--delay:-1.333s"></span><span class="beat" style="--x:0.667;--delay:-0.667s"></span><span class="pl-head"></span></div><span class="pl-count">3</span></div><div class="pl-row"><span class="pl-tick on"></span><div class="pl-track"><span class="beat accent" style="--x:0;--delay:-0s"></span><span class="beat" style="--x:0.25;--delay:-1.5s"></span><span class="beat secondary" style="--x:0.5;--delay:-1s"></span><span class="beat" style="--x:0.75;--delay:-0.5s"></span><span class="pl-head"></span></div><span class="pl-count">4</span></div><div class="pl-row pl-off"><span class="pl-tick"></span><div class="pl-track"><span class="beat accent" style="--x:0"></span><span class="beat" style="--x:0.2"></span><span class="beat" style="--x:0.4"></span><span class="beat" style="--x:0.6"></span><span class="beat" style="--x:0.8"></span></div><span class="pl-count">5</span></div></div>
+          </div>
+          <h3>Parallel</h3>
+          <p>Las voces que marques suenan a la vez, así las oyes una contra otra, como tres contra cuatro.</p>
+        </article>
+      </div>
+
+      <div class="poly-grid">
+        <div class="poly-grid-copy">
+          <h3>Encuentra la proporción áurea</h3>
+          <p>En pantalla completa, unas líneas de cuadrícula opcionales marcan tres puntos del compás, para que veas qué notas caen más cerca de la proporción áurea.</p>
+          <ul class="grid-legend">
+            <li><span class="gl" aria-hidden="true"></span><b>½</b><span>La mitad del compás</span></li>
+            <li><span class="gl gl-dashed" aria-hidden="true"></span><b>φ</b><span>La proporción áurea, 0,618 del compás</span></li>
+            <li><span class="gl gl-dotted" aria-hidden="true"></span><b>⅔</b><span>El punto del shuffle</span></li>
+          </ul>
+          <p class="muted">En la imagen, la novena de 13 notas cae casi exactamente en φ: empieza a los 8/13 del compás, aproximadamente 0,615.</p>
+        </div>
+        <figure class="phone" role="img" aria-label="La pantalla Poly en pantalla completa con líneas de cuadrícula en ½, φ (proporción áurea) y ⅔ del compás, sobre cuatro voces de 3, 4, 7 y 13 notas. En cada voz suena la nota más cercana a la proporción áurea y las demás están en silencio; la novena de las 13 notas queda justo sobre la línea φ.">
+          <svg class="pg" viewBox="0 0 660 1433" aria-hidden="true" focusable="false"><rect class="pg-fill" x="135" y="129" width="390" height="48" rx="24"/><rect class="pg-thumb" x="139" y="133" width="188" height="40" rx="20"/><text class="pg-seg pg-seg-on" x="233" y="160" text-anchor="middle">Secuencial</text><text class="pg-seg" x="427" y="160" text-anchor="middle">Parallel</text><circle class="pg-fill" cx="602" cy="150" r="32"/><path class="pg-x" d="M591 139 L613 161 M613 139 L591 161"/><g class="pg-grid"><line x1="106" y1="224" x2="106" y2="1256"/><line x1="626" y1="224" x2="626" y2="1256"/><line x1="366.0" y1="224" x2="366.0" y2="1256"/><line class="pg-dash" x1="427.4" y1="224" x2="427.4" y2="1256"/><line class="pg-dot" x1="452.7" y1="224" x2="452.7" y2="1256"/></g><g class="pg-label"><text x="366.0" y="214" text-anchor="middle">½</text><text x="423.4" y="214" text-anchor="middle">φ</text><text x="458.7" y="214" text-anchor="middle">⅔</text></g><line class="pg-track" x1="106" y1="348" x2="626" y2="348"/><circle class="pg-tick" cx="51" cy="348" r="16"/><path class="pg-check" d="M43 348 l5.5 6 l10 -12"/><circle class="pg-note on" cx="106.0" cy="348" r="15"/><circle class="pg-note" cx="279.3" cy="348" r="15"/><circle class="pg-note on" cx="452.7" cy="348" r="15"/><line class="pg-track" x1="106" y1="609" x2="626" y2="609"/><circle class="pg-tick" cx="51" cy="609" r="16"/><path class="pg-check" d="M43 609 l5.5 6 l10 -12"/><circle class="pg-note on" cx="106.0" cy="609" r="15"/><circle class="pg-note" cx="236.0" cy="609" r="15"/><circle class="pg-note on" cx="366.0" cy="609" r="15"/><circle class="pg-note" cx="496.0" cy="609" r="15"/><line class="pg-track" x1="106" y1="871" x2="626" y2="871"/><circle class="pg-tick" cx="51" cy="871" r="16"/><path class="pg-check" d="M43 871 l5.5 6 l10 -12"/><circle class="pg-note on" cx="106.0" cy="871" r="15"/><circle class="pg-note" cx="180.3" cy="871" r="15"/><circle class="pg-note" cx="254.6" cy="871" r="15"/><circle class="pg-note" cx="328.9" cy="871" r="15"/><circle class="pg-note on" cx="403.1" cy="871" r="15"/><circle class="pg-note" cx="477.4" cy="871" r="15"/><circle class="pg-note" cx="551.7" cy="871" r="15"/><line class="pg-track" x1="106" y1="1132" x2="626" y2="1132"/><circle class="pg-tick" cx="51" cy="1132" r="16"/><path class="pg-check" d="M43 1132 l5.5 6 l10 -12"/><circle class="pg-note on" cx="106.0" cy="1132" r="15"/><circle class="pg-note" cx="146.0" cy="1132" r="15"/><circle class="pg-note" cx="186.0" cy="1132" r="15"/><circle class="pg-note" cx="226.0" cy="1132" r="15"/><circle class="pg-note" cx="266.0" cy="1132" r="15"/><circle class="pg-note" cx="306.0" cy="1132" r="15"/><circle class="pg-note" cx="346.0" cy="1132" r="15"/><circle class="pg-note" cx="386.0" cy="1132" r="15"/><circle class="pg-note on" cx="426.0" cy="1132" r="15"/><circle class="pg-note" cx="466.0" cy="1132" r="15"/><circle class="pg-note" cx="506.0" cy="1132" r="15"/><circle class="pg-note" cx="546.0" cy="1132" r="15"/><circle class="pg-note" cx="586.0" cy="1132" r="15"/><circle class="pg-play" cx="593" cy="1316" r="42"/><path class="pg-play-icon" d="M581 1296 v40 l33 -20 z"/></svg>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" aria-labelledby="features-title">
+    <div class="wrap">
+      <h2 class="section-title" id="features-title">Cada pulso, a tu manera</h2>
+      <p class="section-lede muted">Para músicos que cuentan más allá de cuatro.</p>
+
+      <div class="feature-grid">
+        <article class="card feature">
+          <div class="art" aria-hidden="true">
+            <div class="art-beats">
+              <figure><span class="beat accent"><svg class="mark"><use href="#mark-marcato"/></svg></span><figcaption>Acento</figcaption></figure>
+              <figure><span class="beat secondary"><svg class="mark"><use href="#mark-accent"/></svg></span><figcaption>Secundario</figcaption></figure>
+              <figure><span class="beat"></span><figcaption>Normal</figcaption></figure>
+              <figure><span class="beat silent"></span><figcaption>Mudo</figcaption></figure>
+            </div>
+          </div>
+          <h3>Cuatro niveles de acento</h3>
+          <p>Toca un pulso para pasar por Acento, Acento secundario, Normal y Mudo. Los signos ^ y &gt; distinguen los niveles sin depender del color.</p>
+        </article>
+
+        <article class="card feature">
+          <div class="art" aria-hidden="true">
+            <div class="tiles">
+              <span class="tile"><svg width="16" height="26"><use href="#n-quarter"/></svg></span>
+              <span class="tile"><svg width="28" height="26"><use href="#n-eighths"/></svg></span>
+              <span class="tile"><svg width="28" height="26"><use href="#n-rest-eighth"/></svg></span>
+              <span class="tile on"><svg width="32" height="26"><use href="#n-dotted"/></svg></span>
+              <span class="tile"><svg width="48" height="26"><use href="#n-sixteenths"/></svg></span>
+              <span class="tile"><svg width="40" height="26"><use href="#n-triplet"/></svg></span>
+            </div>
+          </div>
+          <h3>Un ritmo para cada pulso</h3>
+          <p>Negras, corcheas y todas las combinaciones de semicorcheas y silencios, escritas con notas con puntillo cuando es posible. También tresillos de corchea y los 64 ritmos de tresillos de semicorchea. El selector queda abierto para que los pruebes mientras suena.</p>
+        </article>
+
+        <article class="card feature">
+          <div class="art" aria-hidden="true">
+            <div class="art-many"><span class="beat accent"></span><span class="beat"></span><span class="beat"></span><span class="beat"></span><span class="beat secondary"></span><span class="beat"></span><span class="beat"></span><span class="beat"></span><span class="beat secondary"></span><span class="beat"></span><span class="beat"></span><span class="beat"></span></div>
+          </div>
+          <h3>Compases de hasta 32 pulsos</h3>
+          <p>Elige de 1 a 32 pulsos de negra por compás. Muestra solo los pulsos, lo más grandes posible, en pantalla completa en vertical u horizontal.</p>
+        </article>
+
+        <article class="card feature">
+          <div class="art" aria-hidden="true">
+            <div class="art-watches">
+              <svg class="watch watch-apple" viewBox="-16 -16 448 528"><title>Apple Watch</title>
+                <rect class="w-case" x="-8" y="-8" width="432" height="512" rx="104"/>
+                <rect class="w-face" x="0" y="0" width="416" height="496" rx="96"/>
+                <text class="w-txt w-strong" x="40" y="70" font-size="34">17:11</text>
+                <text class="w-txt w-tint w-strong" x="40" y="114" font-size="34">Mi setlist</text>
+                <circle class="w-btn2" cx="346" cy="74" r="36"/><use class="w-ico-label" href="#i-list" x="328" y="56" width="36" height="36"/>
+                <use class="w-ico" href="#i-poly" x="62" y="164" width="36" height="36"/>
+                <text class="w-txt w-strong" x="108" y="196" font-size="34">Cinco contra cuatro</text>
+                <text class="w-txt w-muted" x="208" y="262" font-size="36" text-anchor="middle">120 BPM</text>
+                <rect class="w-play" x="34" y="316" width="348" height="112" rx="56"/><path class="w-play-icon" d="M190 342v52l42-26z"/>
+              </svg>
+              <svg class="watch watch-wear" viewBox="-20 -20 494 494"><title>Reloj Wear OS</title>
+                <defs><clipPath id="wear-face"><circle cx="227" cy="227" r="227"/></clipPath></defs>
+                <circle class="w-case" cx="227" cy="227" r="237"/>
+                <circle class="w-face" cx="227" cy="227" r="227"/>
+                <text class="w-txt w-muted w-strong" x="227" y="44" font-size="28" text-anchor="middle">5:09</text>
+                <text class="w-txt w-muted" x="227" y="86" font-size="28" text-anchor="middle">Mi setlist</text>
+                <use class="w-ico" href="#i-metronome" x="150" y="100" width="34" height="34"/>
+                <text class="w-txt w-strong" x="194" y="129" font-size="32">Basic</text>
+                <text class="w-txt w-muted" x="227" y="176" font-size="38" text-anchor="middle">123 BPM</text>
+                <rect class="w-btn2" x="138" y="198" width="182" height="62" rx="31"/><use class="w-ico" href="#i-list" x="160" y="213" width="32" height="32"/>
+                <text class="w-txt" x="204" y="239" font-size="26">Songs</text>
+                <rect class="w-play" x="78" y="300" width="298" height="200" rx="80" clip-path="url(#wear-face)"/><path class="w-play-icon" d="M212 350v50l40-25z"/>
+              </svg>
+            </div>
+          </div>
+          <h3>Control remoto en el reloj</h3>
+          <p>Inicia y detén el metrónomo desde tu Apple Watch o tu reloj Wear OS y cambia de canción en la setlist activa. Gira la corona, o el bisel, para recorrer las canciones. Tu teléfono sigue tocando los clics.</p>
+        </article>
+
+        <article class="card feature">
+          <div class="art" aria-hidden="true">
+            <div class="art-setlist">
+              <div class="song"><b>Opener</b><small>132 BPM · 4/4</small></div>
+              <div class="song"><b>Balada en siete</b><small>68 BPM · 7/4</small></div>
+              <div class="song"><b>Tres contra cuatro</b><small>96 BPM · 3:4</small></div>
+            </div>
+          </div>
+          <h3>Setlists</h3>
+          <p>Guarda una configuración como canción, ordena las canciones y ten una setlist para cada banda o concierto. Comparte una setlist desde el menú de compartir, por ejemplo por mensaje o correo.</p>
+        </article>
+
+        <article class="card feature">
+          <div class="art" aria-hidden="true">
+            <div class="art-sound">
+              <span class="chip">Digital</span><span class="chip">Analog</span><span class="chip on">Madera</span><span class="chip">Shaker</span><span class="chip">Pandereta</span><span class="chip">Cencerro</span><span class="chip">Claves</span><span class="chip">Batería</span><span class="chip">Toms</span><span class="chip">Platillos</span>
+            </div>
+          </div>
+          <h3>Sonidos y sensaciones</h3>
+          <p>Diez sets de sonidos, desde clics digitales hasta toms y platillos, y tap tempo hasta 1200 BPM. Péndulo y destello de pantalla opcionales en la pantalla Basic, y puede sonar sobre tu música o tus pistas de acompañamiento.</p>
+        </article>
+      </div>
+
+      <div class="facts">
+        <div class="card fact"><span class="n">10–1200</span><span class="l">BPM</span></div>
+        <div class="card fact"><span class="n">1–32</span><span class="l">Pulsos por compás</span></div>
+        <div class="card fact"><span class="n">8</span><span class="l">Voces Poly</span></div>
+        <div class="card fact"><span class="n">10</span><span class="l">Sets de sonidos</span></div>
+      </div>
+
+      <div class="cta">
+        <img src="../images/app-icon.png" alt="" width="96" height="96">
+        <h2>Listo cuando tú lo estés</h2>
+        <p class="muted">¿Preguntas antes de empezar? La página de <a href="support.html">Ayuda</a> tiene las respuestas.</p>
+        <span class="store"><span class="dot" aria-hidden="true"></span>Próximamente en las tiendas de apps</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span class="muted">Polypulser para iOS y Android</span>
+    <nav aria-label="Pie de página"><a href="support.html">Ayuda</a><a href="privacy.html">Política de privacidad</a></nav>
+  </div>
+</footer>
+</body>
+</html>

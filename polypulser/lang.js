@@ -1,10 +1,10 @@
 /* Language choice. Each page lists its translations as <link rel="alternate" hreflang>.
-   The language picked in the header is remembered; until then, the English pages switch to
-   German when the browser prefers German. Runs in <head>, so the switch happens before the
-   page is shown. */
+   The language picked in the header menu is remembered; until then, the English pages switch to
+   the browser's preferred language when there is a translation. Runs in <head>, so the switch
+   happens before the page is shown. */
 (function () {
   var KEY = "polypulser.lang";
-  var LANGUAGES = ["en", "de"];
+  var LANGUAGES = ["en", "de", "es", "fr", "it"];
   var current = document.documentElement.lang;
 
   function alternate(lang) {
@@ -19,8 +19,21 @@
 
   document.addEventListener("click", function (event) {
     var link = event.target.closest && event.target.closest("a[data-lang]");
-    if (!link) return;
-    try { localStorage.setItem(KEY, link.getAttribute("data-lang")); } catch (e) {}
+    if (link) {
+      try { localStorage.setItem(KEY, link.getAttribute("data-lang")); } catch (e) {}
+      return;
+    }
+    // A click outside the open language menu closes it.
+    var menu = document.querySelector(".lang-menu[open]");
+    if (menu && !menu.contains(event.target)) menu.open = false;
+  });
+
+  document.addEventListener("keydown", function (event) {
+    var menu = document.querySelector(".lang-menu[open]");
+    if (event.key === "Escape" && menu) {
+      menu.open = false;
+      menu.querySelector("summary").focus();
+    }
   });
 
   var stored = null;
