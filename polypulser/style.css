@@ -441,14 +441,18 @@ a:hover { text-decoration-thickness: 3px; }
 .pl-tick { position: relative; flex: none; width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--text-muted); }
 .pl-tick.on { background: var(--accent); border-color: var(--accent); }
 .pl-tick.on::after { content: ""; position: absolute; left: 6px; top: 2.5px; width: 4px; height: 8px; border: solid #ffffff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
-.pl-off { opacity: 0.35; }
+/* The unticked circle stays at full strength, like in Sequential: it is the control that turns the line back on. */
+.pl-off .pl-track, .pl-off .pl-count { opacity: 0.35; }
 .pl-mute .pl-count { opacity: 0.5; }
+/* A muted line keeps its bar (band and playhead still pass), but its notes look as off as in Parallel. */
+.pl-mute .pl-track::before, .pl-mute .pl-track::after, .pl-mute .beat { opacity: 0.35; }
 
 /* Sequential: 6 s — each line gets one 2 s bar, marked by the app's light accent band. */
 .pl-lines.seq .pl-row::before { animation: pl-seq-band 6s linear infinite; animation-delay: var(--delay); }
 .pl-lines.seq .pl-head { animation: pl-seq-head 6s linear infinite; animation-delay: var(--delay); }
 .pl-lines.seq .beat { animation: pl-hit-seq 6s linear infinite; animation-delay: var(--delay); }
 .pl-lines.seq .beat::before { animation: pl-fill-seq 6s linear infinite; animation-delay: var(--delay); }
+.pl-lines.seq .pl-mute .beat, .pl-lines.seq .pl-mute .beat::before { animation: none; }
 /* Parallel: 2 s — every ticked line plays the same bar. */
 .pl-lines.par .pl-row:not(.pl-off) .pl-head { opacity: 1; animation: pl-par-head 2s linear infinite; }
 .pl-lines.par .pl-row:not(.pl-off) .beat { animation: pl-hit-par 2s linear infinite; animation-delay: var(--delay); }
