@@ -199,7 +199,12 @@ a:hover { text-decoration-thickness: 3px; }
 }
 .hero h1 { font-size: clamp(44px, 9vw, 76px); line-height: 0.98; letter-spacing: -0.03em; margin: 0; font-weight: 700; }
 .hero .tagline { font-size: clamp(20px, 3vw, 24px); line-height: 1.35; margin: var(--space-16) 0 0; font-weight: 500; }
-.hero .lede { font-size: 17px; max-width: 34rem; margin: var(--space-16) 0 var(--space-24); }
+.hero .lede { font-size: 17px; max-width: 34rem; margin: var(--space-10) 0 var(--space-24); }
+.hero .made-by {
+  display: flex; align-items: center; gap: var(--space-10);
+  font-size: 19px; line-height: 1.35; font-weight: 600; margin: var(--space-20) 0 0;
+}
+.hero .made-by svg { flex: none; color: var(--accent); }
 .hero .requirements { font-size: 15px; margin: var(--module-spacing) 0 0; }
 
 /* A drawn rendition of the Basic screen */
@@ -509,7 +514,6 @@ a:hover { text-decoration-thickness: 3px; }
 
 .art-sound { width: 100%; display: flex; flex-wrap: wrap; gap: var(--space-6); justify-content: center; max-width: 300px; }
 .chip { font-size: 13px; font-weight: 600; padding: var(--space-4) var(--space-10); border-radius: var(--radius-full); background: var(--fill-tertiary); }
-.chip.on { background: var(--label); color: var(--background); }
 
 /* Watches: Apple Watch (rounded rectangle) and Wear OS (round), drawn like their remote screens */
 .art-watches { display: flex; align-items: center; justify-content: center; gap: var(--space-16); }
