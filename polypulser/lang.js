@@ -9,7 +9,8 @@
 
   function alternate(lang) {
     var link = document.querySelector('link[rel="alternate"][hreflang="' + lang + '"]');
-    return link ? link.href : null;
+    // The links name the live site; keep only the path so the switch stays on this host.
+    return link ? new URL(link.href).pathname : null;
   }
 
   function go(lang) {
