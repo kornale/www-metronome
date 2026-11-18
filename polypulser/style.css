@@ -515,28 +515,16 @@ a:hover { text-decoration-thickness: 3px; }
 .art-sound { width: 100%; display: flex; flex-wrap: wrap; gap: var(--space-6); justify-content: center; max-width: 300px; }
 .chip { font-size: 13px; font-weight: 600; padding: var(--space-4) var(--space-10); border-radius: var(--radius-full); background: var(--fill-tertiary); }
 
-/* Watches: Apple Watch (rounded rectangle) and Wear OS (round), drawn like their remote screens */
-.art-watches { display: flex; align-items: center; justify-content: center; gap: var(--space-16); }
-.watch { height: auto; overflow: visible; }
-.watch-apple { width: 110px; max-width: 42%; }
-.watch-wear { width: 132px; max-width: 50%; }
-.watch text { font-family: var(--font-sans); }
-.w-case { fill: #d1d1d6; }
-.w-face { fill: var(--grouped-row); }
-.w-txt { fill: var(--label); }
-.w-strong { font-weight: 600; }
-.w-muted { fill: var(--text-muted); }
-.w-tint { fill: var(--accent); }
-.w-btn2 { fill: var(--fill-tertiary); }
-.w-ico { color: var(--accent); }
-.w-ico-label { color: var(--label); }
-.w-play { fill: var(--accent); }
-.w-play-icon { fill: #ffffff; stroke: #ffffff; stroke-width: 6; stroke-linejoin: round; }
-@media (prefers-color-scheme: dark) {
-  .w-case { fill: #3a3a3c; }
-  .w-face { fill: #000000; }
-  .w-btn2 { fill: #2c2c2e; }
-}
+/* Now Playing: the system media player on the lock screen and the watch */
+.art-player { width: 100%; max-width: 300px; background: var(--grouped-row); border-radius: 16px; border: 1px solid var(--fill-tertiary); padding: var(--module-spacing) var(--space-16) var(--space-10); }
+.np-head { display: flex; align-items: center; gap: var(--module-spacing); }
+.np-head img { width: 48px; height: 48px; border-radius: 11px; flex: none; }
+.np-text { min-width: 0; }
+.np-text b { display: block; font-size: 15px; line-height: 20px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.np-text small { display: block; font-size: 13px; line-height: 18px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.np-controls { display: flex; align-items: center; justify-content: center; gap: 40px; margin-top: var(--space-10); color: var(--label); }
+.np-controls svg { width: 24px; height: 24px; fill: currentColor; }
+.np-controls .np-play { width: 30px; height: 30px; }
 
 .facts { margin-top: 56px; display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--module-spacing); }
 @media (min-width: 720px) { .facts { grid-template-columns: repeat(4, 1fr); } }
