@@ -37,6 +37,10 @@
     }
   });
 
+  // Opened straight from disk: the alternate links name live-site paths that don't exist here,
+  // so leave switching to the menu.
+  if (location.protocol === "file:") return;
+
   var stored = null;
   try { stored = localStorage.getItem(KEY); } catch (e) {}
   if (LANGUAGES.indexOf(stored) >= 0) {

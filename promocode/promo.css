@@ -1,0 +1,93 @@
+/* Promo code guide. Builds on /polypulser/style.css (tokens, header, footer, .doc, .contact-card). */
+
+.promo { max-width: 1040px; }
+.promo .intro { max-width: var(--prose-width); }
+
+/* Platform switch: a segmented control, shown only when promo.js runs. */
+.platform-switch {
+  display: inline-flex; gap: var(--space-2); margin: var(--space-24) 0 var(--space-8);
+  padding: var(--space-2); border-radius: var(--radius-full); background: var(--fill-tertiary);
+}
+.platform-switch[hidden] { display: none; }
+.platform-switch button {
+  appearance: none; border: 0; margin: 0; cursor: pointer;
+  padding: var(--space-8) var(--space-20); border-radius: var(--radius-full);
+  background: transparent; color: var(--label); font: 600 15px/1.2 var(--font-sans);
+}
+.platform-switch button[aria-pressed="true"] { background: var(--grouped-row); box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12); }
+@media (prefers-color-scheme: dark) {
+  .platform-switch button[aria-pressed="true"] { background: #3a3a3c; }
+}
+.lang-note { font-size: 15px; margin: var(--space-8) 0 0; max-width: var(--prose-width); }
+
+/* One guide per platform. Without JS both are shown; with JS only the chosen one. */
+.guide { margin-top: 40px; }
+.guide h2 { margin: 0 0 var(--space-16); }
+.js .guide h2 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.js .guide { margin-top: var(--space-24); }
+.guide[hidden] { display: none; }
+
+.guide-steps {
+  list-style: none; padding: 0 !important; margin: 0; counter-reset: step;
+  display: grid; gap: var(--space-24);
+}
+.step {
+  counter-increment: step; margin: 0;
+  display: flex; flex-direction: column; gap: var(--space-16);
+  padding: var(--space-20); border-radius: var(--module-corner); background: var(--fill-quinary);
+}
+.step-text { display: flex; gap: var(--module-spacing); align-items: baseline; margin: 0; }
+.step-text::before {
+  content: counter(step); flex: none; width: 30px; height: 30px; border-radius: 50%;
+  display: grid; place-items: center; transform: translateY(5px);
+  background: var(--accent); color: #fff; font: 700 15px/1 var(--font-rounded);
+}
+.step-text b { font-weight: 650; }
+.step .hint { font-size: 15px; margin: calc(-1 * var(--space-8)) 0 0 42px; }
+
+/* Screenshot with the tap target highlighted. Positions are percentages of the image. */
+.shot {
+  position: relative; margin: 0 auto; width: min(100%, 280px);
+  border-radius: 22px; overflow: hidden;
+  border: 1px solid var(--fill-tertiary); box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+}
+.shot img { width: 100%; height: auto; }
+.hit {
+  position: absolute; left: var(--x); top: var(--y); width: var(--w); height: var(--h);
+  transform: translate(-50%, -50%);
+  border: 3px solid var(--accent); border-radius: var(--r, 9999px);
+  box-shadow: 0 0 0 4px rgba(242, 107, 29, 0.25), 0 0 18px rgba(242, 107, 29, 0.45);
+  pointer-events: none;
+}
+.hit::after {
+  content: ""; position: absolute; inset: -3px; border-radius: inherit;
+  border: 3px solid var(--accent); animation: hit-pulse 1.8s ease-out infinite;
+}
+@keyframes hit-pulse {
+  0% { opacity: 0.9; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.35, 1.6); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hit::after { animation: none; display: none; }
+}
+
+/* Final step without a screenshot: a small mock of the code field. */
+.code-field {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-8);
+  margin: 0 auto; width: min(100%, 280px); padding: var(--space-16);
+  border-radius: 14px; background: var(--grouped-row); border: 2px solid var(--accent);
+  font: 600 17px/1.2 var(--font-rounded); letter-spacing: 0.12em;
+}
+.code-field span:last-child { letter-spacing: normal; color: var(--accent); font-family: var(--font-sans); font-size: 15px; }
+
+.done { margin-top: 40px; display: flex; gap: var(--module-spacing); align-items: baseline; max-width: var(--prose-width); }
+.done::before { content: "✓"; flex: none; color: var(--accent); font-weight: 700; font-size: 20px; }
+
+.promo .contact-card { max-width: var(--prose-width); }
+
+@media (min-width: 720px) {
+  .guide-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 980px) {
+  .guide-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
