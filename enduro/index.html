@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enduro-Spezialtraining &amp; Wandertour · 23.–27. Juni 2027</title>
+<meta name="description" content="Club-Angebot: 2 Tage Enduro-Spezialtraining und optionale Enduro-Wandertour beim Enduro Action Team, 23.–27. Juni 2027.">
+<link rel="icon" href="https://www.enduroactionteam.com/wp-content/uploads/2016/11/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #dd3333;
+    --red-dark: #b82525;
+    --green: #51b71a;
+    --text: #676767;
+    --heading: #444;
+    --muted: #999;
+    --bg-soft: #f6f6f6;
+    --dark: #1c1c1c;
+    --radius: 3px;
+    --shadow: 0 2px 14px rgba(0,0,0,.08);
+    --max: 1180px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+  body {
+    margin: 0;
+    font-family: "Source Sans 3", "Source Sans Pro", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text);
+    background: #fff;
+  }
+  h1, h2, h3, h4 {
+    font-family: Raleway, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    color: var(--heading);
+    line-height: 1.25;
+    margin: 0 0 .6em;
+  }
+  h2 { font-size: clamp(24px, 3vw, 30px); }
+  h3 { font-size: 20px; }
+  a { color: var(--red); }
+  img { max-width: 100%; display: block; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+  /* Header */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: #fff;
+    box-shadow: 0 1px 0 rgba(0,0,0,.06);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+  .logo img { height: 46px; width: auto; }
+  .nav ul { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
+  .nav ul a {
+    font-family: Helvetica, Arial, sans-serif;
+    color: var(--muted); text-decoration: none; font-size: 15px;
+    padding: 6px 0; border-bottom: 2px solid transparent; transition: color .2s, border-color .2s;
+  }
+  .nav ul a:hover, .nav ul a.active { color: var(--red); border-bottom-color: var(--red); }
+  .burger { display: none; background: none; border: 0; padding: 8px; cursor: pointer; }
+  .burger span { display: block; width: 24px; height: 2px; background: var(--heading); margin: 5px 0; transition: transform .25s, opacity .25s; }
+  .burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .topbar {
+    background: var(--green); color: #fff; text-align: center;
+    font-size: 15px; padding: 9px 16px;
+  }
+  .topbar strong { font-weight: 600; }
+
+  /* Hero */
+  .hero {
+    position: relative; min-height: min(78vh, 640px);
+    display: flex; align-items: center;
+    background: #333 url("https://www.enduroactionteam.com/wp-content/uploads/2024/10/Enduro-Action-Team-Header-Trainings.jpg") center 40% / cover no-repeat;
+  }
+  .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.35), rgba(0,0,0,0) 65%); }
+  .hero .wrap { position: relative; z-index: 1; width: 100%; }
+  .hero h1, .hero p.sub {
+    display: inline;
+    background: rgba(0,0,0,.55); color: #fff;
+    box-decoration-break: clone; -webkit-box-decoration-break: clone;
+  }
+  .hero h1 { font-size: clamp(30px, 5vw, 50px); padding: 2px 12px; line-height: 1.45; }
+  .hero p.sub { font-size: clamp(17px, 2vw, 21px); padding: 4px 12px; line-height: 2; }
+  .hero .line { margin: 0 0 10px; }
+  .hero .cta { margin-top: 26px; display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-block; background: var(--red); color: #fff; text-decoration: none;
+    font-size: 15px; font-weight: 600; padding: 12px 26px; border-radius: var(--radius);
+    transition: background .2s, transform .2s; border: 0; cursor: pointer;
+  }
+  .btn:hover { background: var(--red-dark); }
+  .btn.ghost { background: rgba(255,255,255,.92); color: var(--heading); }
+  .btn.ghost:hover { background: #fff; }
+
+  /* Sections */
+  section { padding: 72px 0; }
+  section.soft { background: var(--bg-soft); }
+  .section-head { text-align: center; max-width: 760px; margin: 0 auto 44px; }
+  .section-head .kicker {
+    display: inline-block; color: var(--red); font-family: Raleway, sans-serif; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .12em; font-size: 13px; margin-bottom: 8px;
+  }
+  .lead { font-size: 19px; }
+
+  /* Intro split */
+  .split { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center; }
+  .split img { border-radius: var(--radius); box-shadow: var(--shadow); aspect-ratio: 4/3; object-fit: cover; width: 100%; }
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 28px; }
+  .fact { background: var(--bg-soft); padding: 16px 12px; text-align: center; border-radius: var(--radius); }
+  .fact b { display: block; font-family: Raleway, sans-serif; font-size: 26px; color: var(--red); line-height: 1.2; }
+  .fact span { font-size: 14px; }
+
+  /* Timeline */
+  .days { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
+  .day {
+    background: #fff; box-shadow: var(--shadow); border-radius: var(--radius); overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .day .date { background: var(--heading); color: #fff; padding: 14px 16px; }
+  .day .date small { display: block; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; opacity: .8; }
+  .day .date b { font-family: Raleway, sans-serif; font-size: 22px; }
+  .day.train .date { background: var(--red); }
+  .day.tour .date { background: var(--green); }
+  .day .body { padding: 16px; flex: 1; }
+  .day h3 { font-size: 17px; margin-bottom: .4em; }
+  .day p { margin: 0; font-size: 15px; }
+  .tag {
+    display: inline-block; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em;
+    padding: 2px 8px; border-radius: 2px; margin-top: 10px;
+    background: #fff4e5; color: #b26a00;
+  }
+
+  /* Cards (products) */
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; align-items: stretch; }
+  .card {
+    background: #fff; box-shadow: var(--shadow); border-radius: var(--radius);
+    display: flex; flex-direction: column; overflow: hidden; position: relative;
+  }
+  .card img { aspect-ratio: 1/1; object-fit: cover; width: 100%; }
+  .card .body { padding: 22px 24px 26px; display: flex; flex-direction: column; flex: 1; text-align: center; }
+  .card h3 { margin-bottom: 4px; }
+  .price { font-family: Raleway, sans-serif; font-size: 38px; font-weight: 700; color: var(--heading); margin: 6px 0 2px; }
+  .price small { font-size: 15px; font-weight: 400; color: var(--muted); }
+  .card ul { text-align: left; list-style: none; padding: 0; margin: 16px 0 0; font-size: 15.5px; }
+  .card li { padding: 7px 0 7px 26px; border-top: 1px solid #eee; position: relative; }
+  .card li::before { content: "✓"; position: absolute; left: 4px; color: var(--green); font-weight: 700; }
+  .card li.addon::before { content: "+"; color: var(--red); }
+  .card .spacer { flex: 1; }
+  .card.featured { outline: 3px solid var(--red); }
+  .ribbon {
+    position: absolute; top: 16px; right: -38px; transform: rotate(45deg);
+    background: var(--red); color: #fff; font-size: 12px; font-weight: 600; letter-spacing: .06em;
+    text-transform: uppercase; padding: 5px 44px;
+  }
+  .note-own {
+    margin: 30px auto 0; max-width: 780px; background: #fff; border-left: 4px solid var(--green);
+    padding: 18px 22px; box-shadow: var(--shadow); border-radius: var(--radius);
+  }
+  .note-own b { color: var(--heading); }
+
+  /* Group */
+  .group-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  .group-item { text-align: center; padding: 10px 18px; }
+  .group-item .icon {
+    width: 64px; height: 64px; border-radius: 50%; background: var(--red); color: #fff;
+    display: grid; place-items: center; margin: 0 auto 16px; font-family: Raleway, sans-serif; font-weight: 700; font-size: 22px;
+  }
+
+  /* Included table */
+  .incl { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  .incl .box { background: #fff; padding: 26px 28px; box-shadow: var(--shadow); border-radius: var(--radius); }
+  .incl ul { padding-left: 1.1em; margin: 0; }
+  .incl li { margin: 6px 0; }
+  .incl .yes h3 { color: var(--green); }
+  .incl .no h3 { color: var(--red); }
+  .rooms { display: flex; gap: 14px; margin-top: 18px; flex-wrap: wrap; }
+  .room { flex: 1; min-width: 130px; background: var(--bg-soft); padding: 14px; text-align: center; border-radius: var(--radius); }
+  .room b { display: block; font-family: Raleway, sans-serif; font-size: 24px; color: var(--heading); }
+
+  /* Calculator */
+  .calc { background: #fff; box-shadow: var(--shadow); border-radius: var(--radius); padding: 30px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 36px; }
+  .calc fieldset { border: 0; padding: 0; margin: 0 0 20px; }
+  .calc legend { font-family: Raleway, sans-serif; font-weight: 600; color: var(--heading); margin-bottom: 8px; }
+  .opts { display: grid; gap: 8px; }
+  .opt {
+    display: flex; gap: 10px; align-items: flex-start; border: 1px solid #e3e3e3; padding: 10px 12px; border-radius: var(--radius);
+    cursor: pointer; transition: border-color .2s, background .2s; font-size: 15.5px;
+  }
+  .opt:has(input:checked) { border-color: var(--red); background: #fff6f6; }
+  .opt input { accent-color: var(--red); margin-top: 5px; }
+  .opt span small { display: block; color: var(--muted); font-size: 13.5px; }
+  .opts.inline { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+  .nights { display: flex; align-items: center; gap: 12px; }
+  .nights button { width: 38px; height: 38px; border: 1px solid #ddd; background: #fff; font-size: 20px; cursor: pointer; border-radius: var(--radius); color: var(--heading); }
+  .nights output { font-family: Raleway, sans-serif; font-size: 22px; font-weight: 600; color: var(--heading); min-width: 2ch; text-align: center; }
+  .result { background: var(--bg-soft); border-radius: var(--radius); padding: 24px; align-self: start; position: sticky; top: 100px; }
+  .result table { width: 100%; border-collapse: collapse; font-size: 15.5px; }
+  .result td { padding: 7px 0; border-bottom: 1px solid #e2e2e2; vertical-align: top; }
+  .result td:last-child { text-align: right; white-space: nowrap; padding-left: 12px; }
+  .result tr.total td { border-bottom: 0; border-top: 2px solid var(--heading); font-family: Raleway, sans-serif; font-weight: 700; font-size: 22px; color: var(--heading); padding-top: 12px; }
+  .result .fine { font-size: 13.5px; color: var(--muted); margin: 12px 0 0; }
+
+  /* Open points */
+  .open { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .open .item { border-top: 3px solid #f0a020; background: #fff; padding: 20px 22px; box-shadow: var(--shadow); border-radius: var(--radius); }
+  .open h3 { font-size: 17px; }
+  .open p { margin: 0; font-size: 15.5px; }
+
+  /* Gallery */
+  .gallery { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 220px; gap: 10px; }
+  .gallery figure { margin: 0; position: relative; overflow: hidden; cursor: zoom-in; background: #ddd; border-radius: var(--radius); }
+  .gallery figure.wide { grid-column: span 2; }
+  .gallery figure.tall { grid-row: span 2; }
+  .gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+  .gallery figure:hover img { transform: scale(1.05); }
+  .gallery figcaption {
+    position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 12px 9px; color: #fff; font-size: 14px;
+    background: linear-gradient(transparent, rgba(0,0,0,.7));
+  }
+  .lightbox {
+    position: fixed; inset: 0; background: rgba(0,0,0,.9); display: none; align-items: center; justify-content: center;
+    z-index: 100; padding: 24px; flex-direction: column; gap: 12px;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-height: 82vh; max-width: 92vw; object-fit: contain; }
+  .lightbox p { color: #ddd; margin: 0; }
+  .lightbox button { position: absolute; background: none; border: 0; color: #fff; font-size: 40px; cursor: pointer; padding: 10px 16px; line-height: 1; }
+  .lb-close { top: 10px; right: 10px; }
+  .lb-prev { left: 6px; top: 50%; transform: translateY(-50%); }
+  .lb-next { right: 6px; top: 50%; transform: translateY(-50%); }
+
+  /* CTA */
+  .cta-band {
+    position: relative; color: #fff; text-align: center; padding: 96px 0;
+    background: #222 url("https://www.enduroactionteam.com/wp-content/uploads/2023/11/splitt-hg-2024.jpg") center / cover no-repeat;
+  }
+  .cta-band::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,.6); }
+  .cta-band .wrap { position: relative; max-width: 760px; }
+  .cta-band h2 { color: #fff; }
+  .cta-band blockquote { font-size: 19px; font-style: italic; margin: 0 0 26px; }
+  .cta-band cite { display: block; font-style: normal; font-size: 15px; opacity: .8; margin-top: 8px; }
+
+  footer { background: var(--dark); color: #999; font-size: 14px; padding: 34px 0; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+  footer a { color: var(--red); text-decoration: none; }
+
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+
+  /* Responsive */
+  @media (max-width: 1080px) {
+    .days { grid-template-columns: repeat(3, 1fr); }
+    .gallery { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 900px) {
+    .burger { display: block; }
+    .nav ul {
+      position: absolute; top: 76px; left: 0; right: 0; background: #fff; flex-direction: column; gap: 0;
+      box-shadow: 0 8px 18px rgba(0,0,0,.08); max-height: 0; overflow: hidden; transition: max-height .3s ease;
+    }
+    .nav ul.open { max-height: 420px; }
+    .nav ul a { display: block; padding: 14px 24px; border-bottom: 1px solid #f0f0f0; }
+    .split, .incl, .calc { grid-template-columns: 1fr; }
+    .cards, .group-grid, .open { grid-template-columns: 1fr; max-width: 520px; margin-left: auto; margin-right: auto; }
+    .result { position: static; }
+    .card.featured { order: -1; }
+    .card img { aspect-ratio: 16/10; }
+  }
+  @media (max-width: 640px) {
+    body { font-size: 16px; }
+    section { padding: 52px 0; }
+    .wrap { padding: 0 18px; }
+    .days { grid-template-columns: 1fr; }
+    .day { flex-direction: row; }
+    .day .date { width: 108px; flex: none; display: flex; flex-direction: column; justify-content: center; }
+    .facts { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    .fact b { font-size: 21px; }
+    .gallery { grid-template-columns: 1fr 1fr; grid-auto-rows: 150px; }
+    .gallery figure.wide { grid-column: span 2; }
+    .calc { padding: 20px; }
+    .topbar { font-size: 14px; }
+    .hero { min-height: 520px; background-position: 62% 40%; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="Zum Seitenanfang">
+      <img src="https://www.enduroactionteam.com/wp-content/uploads/2020/04/EAT_Logo_201909_500px.png" alt="Enduro Action Team">
+    </a>
+    <button class="burger" aria-label="Menü" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+    <ul id="menu">
+      <li><a href="#programm">Programm</a></li>
+      <li><a href="#gruppe">Gruppe</a></li>
+      <li><a href="#preise">Preise</a></li>
+      <li><a href="#unterkunft">Unterkunft</a></li>
+      <li><a href="#rechner">Kostenrechner</a></li>
+      <li><a href="#galerie">Galerie</a></li>
+    </ul>
+  </div>
+</header>
+
+<div class="topbar" id="top">
+  <strong>Exklusives Club-Angebot</strong> · 23.–27. Juni 2027 · Hotel Schildbürger hat noch Platz für bis zu 12 Personen
+</div>
+
+<section class="hero" aria-label="Angebot">
+  <div class="wrap">
+    <div class="line"><h1>Enduro-Spezialtraining &amp; Wandertour</h1></div>
+    <div class="line"><p class="sub">2 Tage Fahrtechnik + 1 Tag geführte Tour · 23.–27. Juni 2027</p></div>
+    <div class="cta">
+      <a class="btn" href="#preise">Preise ansehen</a>
+      <a class="btn ghost" href="#programm">Zum Programm</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split">
+    <div class="reveal">
+      <div class="section-head" style="text-align:left;margin:0 0 18px">
+        <span class="kicker">Der Vorschlag</span>
+        <h2>Zwei Tage Technik, ein Tag Tour</h2>
+      </div>
+      <p class="lead">Zwei Tage gemeinsam an der Fahrtechnik arbeiten und das Gelernte am Samstag direkt auf einer schönen Enduro-Wandertour in die Praxis umsetzen.</p>
+      <p>Das Enduro Action Team hat für unseren Club einen passenden Termin gefunden: Beim <b>Hotel Schildbürger</b> sind für das Training vom 24. bis 25. Juni 2027 noch Zimmer für bis zu 12 Personen frei.</p>
+      <div class="facts">
+        <div class="fact"><b>2</b><span>Tage Spezialtraining</span></div>
+        <div class="fact"><b>+1</b><span>Tag Wandertour (optional)</span></div>
+        <div class="fact"><b>12</b><span>Plätze max.</span></div>
+      </div>
+    </div>
+    <img class="reveal" src="https://www.enduroactionteam.com/wp-content/uploads/2024/10/Enduro-Action-Team-Impression-Individual-Training.jpg" alt="Gruppe beim Enduro-Training" loading="lazy">
+  </div>
+</section>
+
+<section class="soft" id="programm">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Programm</span>
+      <h2>Ablauf vom 23. bis 27. Juni 2027</h2>
+    </div>
+    <div class="days">
+      <article class="day reveal">
+        <div class="date"><small>Mittwoch</small><b>23.06.</b></div>
+        <div class="body"><h3>Anreise</h3><p>Ankunft und Übernachtung bei den Schildbürgern.</p></div>
+      </article>
+      <article class="day train reveal">
+        <div class="date"><small>Donnerstag</small><b>24.06.</b></div>
+        <div class="body"><h3>Spezialtraining · Tag 1</h3><p>Fahrtechnik in der Gruppe, je nach Teilnehmerzahl in zwei Levels.</p></div>
+      </article>
+      <article class="day train reveal">
+        <div class="date"><small>Freitag</small><b>25.06.</b></div>
+        <div class="body"><h3>Spezialtraining · Tag 2</h3><p>Zweiter Trainingstag, das Gelernte vertiefen.</p></div>
+      </article>
+      <article class="day tour reveal">
+        <div class="date"><small>Samstag</small><b>26.06.</b></div>
+        <div class="body"><h3>Enduro-Wandertour</h3><p>Optional: geführte Tour, um das Training auf der Strecke umzusetzen.</p><span class="tag">wird noch geprüft</span></div>
+      </article>
+      <article class="day reveal">
+        <div class="date"><small>Sonntag</small><b>27.06.</b></div>
+        <div class="body"><h3>Heimreise</h3><p>Abreise nach dem Frühstück.</p><span class="tag">Übernachtung Sa wird geprüft</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="gruppe">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Gruppengröße</span>
+      <h2>Wie viele müssen wir sein?</h2>
+      <p>Eine echte Mindestteilnehmerzahl gibt es nicht. Das ist eine Frage der Kalkulation.</p>
+    </div>
+    <div class="group-grid">
+      <div class="group-item reveal">
+        <div class="icon">5+</div>
+        <h3>Ab 5 Personen</h3>
+        <p>Ab 5 Teilnehmenden gelten die Konditionen auf dieser Seite. Mit weniger geht es grundsätzlich auch, dann wird neu kalkuliert.</p>
+      </div>
+      <div class="group-item reveal">
+        <div class="icon">≤7</div>
+        <h3>Bis 7 Personen</h3>
+        <p>Eine gemeinsame Trainingsgruppe. Ideal ist dann ein ähnliches fahrerisches Niveau bei allen.</p>
+      </div>
+      <div class="group-item reveal">
+        <div class="icon">12</div>
+        <h3>Bis 12 Personen</h3>
+        <p>Bei entsprechender Teilnehmerzahl bilden wir zwei Gruppen mit unterschiedlichen Fahrlevels.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="soft" id="preise">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Preise ab 5 Personen</span>
+      <h2>Die Angebote im Überblick</h2>
+      <p>Alle Preise pro Person, inklusive Mittagessen, Getränken und Snacks an den Fahrtagen.</p>
+    </div>
+    <div class="cards">
+      <article class="card reveal">
+        <img src="https://www.enduroactionteam.com/wp-content/uploads/2024/10/Enduro-Action-Team-2TE-Product.jpg" alt="2-Tages-Training" loading="lazy">
+        <div class="body">
+          <h3>2 Tage Spezialtraining</h3>
+          <div class="price">520 € <small>p. P.</small></div>
+          <ul>
+            <li>Exklusives Training, Do + Fr</li>
+            <li>Mittagessen, Getränke und Snacks an beiden Tagen</li>
+            <li class="addon">Leihmotorrad für beide Tage: <b>200 €</b>, jedes Modell, inkl. Kraftstoff &amp; Reinigung</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card featured reveal">
+        <span class="ribbon">Paket</span>
+        <img src="https://www.enduroactionteam.com/wp-content/uploads/2024/10/Enduro-Action-Team-2TP-Product.jpg" alt="Training und Tour mit Leihmotorrad" loading="lazy">
+        <div class="body">
+          <h3>Komplettpaket 3 Tage</h3>
+          <div class="price">1.100 € <small>p. P.</small></div>
+          <ul>
+            <li>2 Tage exklusives Spezialtraining</li>
+            <li>1 Tag geführte Enduro-Wandertour</li>
+            <li>Leihmotorrad für alle 3 Tage</li>
+            <li>Kraftstoff und Fahrzeugreinigung</li>
+            <li>Mittagessen, Getränke und Snacks an allen 3 Tagen</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <img src="https://www.enduroactionteam.com/wp-content/uploads/2016/12/enduro-action-team-1TWL-product.jpg" alt="Enduro-Wandertour Lossatal" loading="lazy">
+        <div class="body">
+          <h3>Enduro-Wandertour (Sa)</h3>
+          <div class="price">265 € <small>p. P.</small></div>
+          <ul>
+            <li>Geführte Tagestour</li>
+            <li>Mittagessen, Getränke und Snacks</li>
+            <li class="addon">Leihmotorrad für den Tag: <b>120 €</b></li>
+          </ul>
+        </div>
+      </article>
+    </div>
+
+    <div class="note-own reveal">
+      <b>Mit eigenem Motorrad:</b> 2 Tage Spezialtraining + 1 Tag Wandertour kosten zusammen <b>785 € pro Person</b>.
+    </div>
+  </div>
+</section>
+
+<section id="unterkunft">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Verpflegung &amp; Unterkunft</span>
+      <h2>Was ist dabei, was zahlt jeder selbst?</h2>
+    </div>
+    <div class="incl">
+      <div class="box yes reveal">
+        <h3>✓ Im Preis enthalten</h3>
+        <ul>
+          <li>Mittagessen an allen Trainings- und Tourtagen</li>
+          <li>Getränke und Snacks tagsüber</li>
+          <li>Beim Leihmotorrad: Kraftstoff und Reinigung</li>
+        </ul>
+      </div>
+      <div class="box no reveal">
+        <h3>✗ Nicht enthalten</h3>
+        <ul>
+          <li>Hotelübernachtungen</li>
+          <li>Abendessen und Getränke beim Abendessen</li>
+        </ul>
+        <p style="margin:14px 0 0">Das rechnet jeder direkt und individuell mit dem <b>Hotel Schildbürger</b> ab.</p>
+        <div class="rooms">
+          <div class="room"><b>65 €</b>Einzelzimmer / Nacht</div>
+          <div class="room"><b>98 €</b>Doppelzimmer / Nacht</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="soft" id="rechner">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Kostenrechner</span>
+      <h2>Was kostet das für mich?</h2>
+      <p>Grobe Schätzung pro Person, ohne Abendessen und Anreise.</p>
+    </div>
+    <form class="calc reveal" id="calc" onsubmit="return false">
+      <div>
+        <fieldset>
+          <legend>Programm</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="pkg" value="training"><span>Nur 2 Tage Spezialtraining<small>520 €</small></span></label>
+            <label class="opt"><input type="radio" name="pkg" value="own" checked><span>Training + Wandertour, eigenes Motorrad<small>785 €</small></span></label>
+            <label class="opt"><input type="radio" name="pkg" value="package"><span>Komplettpaket mit Leihmotorrad (3 Tage)<small>1.100 €</small></span></label>
+          </div>
+        </fieldset>
+        <fieldset id="rentalSet">
+          <legend>Leihmotorrad fürs Training?</legend>
+          <div class="opts inline">
+            <label class="opt"><input type="radio" name="rent" value="0" checked><span>Eigenes Motorrad</span></label>
+            <label class="opt"><input type="radio" name="rent" value="1"><span>Leihen<small>+200 €</small></span></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Zimmer</legend>
+          <div class="opts inline">
+            <label class="opt"><input type="radio" name="room" value="single" checked><span>Einzelzimmer<small>65 € / Nacht</small></span></label>
+            <label class="opt"><input type="radio" name="room" value="double"><span>Doppelzimmer geteilt<small>49 € / Nacht p. P.</small></span></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Nächte</legend>
+          <div class="nights">
+            <button type="button" data-step="-1" aria-label="Eine Nacht weniger">−</button>
+            <output id="nights">4</output>
+            <button type="button" data-step="1" aria-label="Eine Nacht mehr">+</button>
+            <span id="nightsHint" style="font-size:14px;color:var(--muted)"></span>
+          </div>
+        </fieldset>
+      </div>
+      <div class="result" aria-live="polite">
+        <table>
+          <tbody id="rows"></tbody>
+          <tfoot><tr class="total"><td>Total ca.</td><td id="total"></td></tr></tfoot>
+        </table>
+        <p class="fine">Hotel: Zimmerpreis laut Angebot, im Doppelzimmer halbiert. Übernachtung Sa→So und Wandertour sind noch nicht bestätigt.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section id="offen">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Noch offen</span>
+      <h2>Was das Enduro Action Team noch prüft</h2>
+    </div>
+    <div class="open">
+      <div class="item reveal"><h3>Wandertour am Samstag</h3><p>Ob die optionale Tour am 26.06. umgesetzt werden kann, wird noch geprüft.</p></div>
+      <div class="item reveal"><h3>Übernachtung bis Sonntag</h3><p>Die Zimmer für das Training sind frei. Die zusätzliche Nacht Sa→So muss noch bestätigt werden.</p></div>
+      <div class="item reveal"><h3>Weniger als 5 Personen</h3><p>Grundsätzlich möglich, dann wird die Kalkulation noch einmal angeschaut.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="soft" id="galerie">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Impressionen</span>
+      <h2>Trainings &amp; Touren</h2>
+    </div>
+    <div class="gallery" id="gallery">
+      <figure class="wide tall"><img src="https://www.enduroactionteam.com/wp-content/uploads/2016/12/enduro-action-team-1TWL-product.jpg" alt="1-tägige Enduro Wander Tour Lossatal" loading="lazy"><figcaption>Enduro-Wandertour Lossatal</figcaption></figure>
+      <figure><img src="https://www.enduroactionteam.com/wp-content/uploads/2024/10/Enduro-Action-Team-1TF-Product.jpg" alt="Training für Fortgeschrittene" loading="lazy"><figcaption>Training Fortgeschrittene</figcaption></figure>
+      <figure><img src="https://www.enduroactionteam.com/wp-content/uploads/2024/10/Enduro-Action-Team-1TE-Product.jpg" alt="Training für Einsteiger" loading="lazy"><figcaption>Training Einsteiger</figcaption></figure>
+      <figure><img src="https://www.enduroactionteam.com/wp-content/uploads/2020/09/4-Tage-Endurowandern-Sachsen-3.jpg" alt="Endurowandern in Sachsen" loading="lazy"><figcaption>Endurowandern in Sachsen</figcaption></figure>
+      <figure><img src="https://www.enduroactionteam.com/wp-content/uploads/2017/11/enduro-action-team-2TF-product.jpg" alt="2-Tages-Training Fortgeschrittene" loading="lazy"><figcaption>2-Tages-Training</figcaption></figure>
+      <figure class="wide"><img src="https://www.enduroactionteam.com/wp-content/uploads/2023/11/splitt-hg-2024.jpg" alt="Enduro im Gelände" loading="lazy"><figcaption>Im Gelände</figcaption></figure>
+      <figure><img src="https://www.enduroactionteam.com/wp-content/uploads/2020/10/enduro-action-team-2tdd-product.jpg" alt="Enduro-Wandertour Dresden" loading="lazy"><figcaption>Wandertour bei Dresden</figcaption></figure>
+      <figure><img src="https://www.enduroactionteam.com/wp-content/uploads/2024/10/Enduro-Action-Team-2TP-Product.jpg" alt="Enduro-Training" loading="lazy"><figcaption>Training</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Bildansicht">
+  <button class="lb-close" aria-label="Schließen">×</button>
+  <button class="lb-prev" aria-label="Vorheriges Bild">‹</button>
+  <img alt="">
+  <p></p>
+  <button class="lb-next" aria-label="Nächstes Bild">›</button>
+</div>
+
+<section class="cta-band">
+  <div class="wrap reveal">
+    <h2>Wer ist dabei?</h2>
+    <blockquote>
+      „Ich würde mich auf jeden Fall sehr freuen, Dich und ein paar weitere Vorarlberger wieder bei uns begrüßen zu dürfen!“
+      <cite>Enduro Action Team</cite>
+    </blockquote>
+    <p>Gib mir bitte bis 7. Dezember Bescheid, ob du mitkommst und welche Variante du willst. Dann können wir die Teilnehmerzahl melden und die Zimmer beim Hotel Schildbürger sichern.</p>
+    <a class="btn" href="https://www.enduroactionteam.com" target="_blank" rel="noopener">Zum Enduro Action Team</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Zusammenfassung des Angebots vom Enduro Action Team für unseren Club. Keine offizielle Seite des Enduro Action Team.</span>
+    <span>Bilder: <a href="https://www.enduroactionteam.com" target="_blank" rel="noopener">enduroactionteam.com</a></span>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu
+  const burger = document.querySelector('.burger');
+  const menu = document.getElementById('menu');
+  burger.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open);
+  });
+  menu.addEventListener('click', e => {
+    if (e.target.tagName === 'A') { menu.classList.remove('open'); burger.setAttribute('aria-expanded', false); }
+  });
+
+  // Active nav link
+  const links = [...menu.querySelectorAll('a')];
+  const spy = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id));
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  links.forEach(a => { const s = document.querySelector(a.getAttribute('href')); if (s) spy.observe(s); });
+
+  // Reveal on scroll
+  const rev = new IntersectionObserver(entries => {
+    entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); rev.unobserve(en.target); } });
+  }, { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el => rev.observe(el));
+
+  // Cost calculator
+  const form = document.getElementById('calc');
+  const nightsOut = document.getElementById('nights');
+  const eur = n => n.toLocaleString('de-DE') + ' €';
+  const defaults = { training: 3, own: 4, package: 4 };
+  let nights = 4, lastPkg = 'own';
+
+  function render() {
+    const pkg = form.pkg.value;
+    if (pkg !== lastPkg) { nights = defaults[pkg]; lastPkg = pkg; }
+    const rent = pkg === 'training' && form.rent.value === '1';
+    document.getElementById('rentalSet').style.display = pkg === 'training' ? '' : 'none';
+    const perNight = form.room.value === 'single' ? 65 : 49;
+    const rows = [];
+    if (pkg === 'training') rows.push(['2 Tage Spezialtraining', 520]);
+    if (pkg === 'own') rows.push(['Training + Wandertour (eigenes Motorrad)', 785]);
+    if (pkg === 'package') rows.push(['Komplettpaket inkl. Leihmotorrad', 1100]);
+    if (rent) rows.push(['Leihmotorrad 2 Tage', 200]);
+    rows.push([`Hotel: ${nights} × ${perNight} €`, nights * perNight]);
+    document.getElementById('rows').innerHTML = rows.map(([l, v]) => `<tr><td>${l}</td><td>${eur(v)}</td></tr>`).join('');
+    document.getElementById('total').textContent = eur(rows.reduce((s, r) => s + r[1], 0));
+    nightsOut.textContent = nights;
+    document.getElementById('nightsHint').textContent = nights === 4 ? 'Mi → So' : nights === 3 ? 'Mi → Sa' : '';
+  }
+  form.addEventListener('change', render);
+  form.querySelectorAll('[data-step]').forEach(b => b.addEventListener('click', () => {
+    nights = Math.min(6, Math.max(0, nights + Number(b.dataset.step)));
+    render();
+  }));
+  render();
+
+  // Lightbox
+  const figs = [...document.querySelectorAll('#gallery figure')];
+  const lb = document.getElementById('lightbox');
+  const lbImg = lb.querySelector('img'), lbCap = lb.querySelector('p');
+  let idx = 0;
+  const show = i => {
+    idx = (i + figs.length) % figs.length;
+    const img = figs[idx].querySelector('img');
+    lbImg.src = img.src; lbImg.alt = img.alt;
+    lbCap.textContent = figs[idx].querySelector('figcaption').textContent;
+    lb.classList.add('open');
+  };
+  figs.forEach((f, i) => f.addEventListener('click', () => show(i)));
+  lb.querySelector('.lb-close').onclick = () => lb.classList.remove('open');
+  lb.querySelector('.lb-prev').onclick = e => { e.stopPropagation(); show(idx - 1); };
+  lb.querySelector('.lb-next').onclick = e => { e.stopPropagation(); show(idx + 1); };
+  lb.addEventListener('click', e => { if (e.target === lb) lb.classList.remove('open'); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') lb.classList.remove('open');
+    if (e.key === 'ArrowLeft') show(idx - 1);
+    if (e.key === 'ArrowRight') show(idx + 1);
+  });
+</script>
+</body>
+</html>
